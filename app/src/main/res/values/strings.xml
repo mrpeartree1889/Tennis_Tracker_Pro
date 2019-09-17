@@ -1,3 +1,22 @@
 <resources>
+    // MAIN PAGE TEXT
     <string name="app_name">Tennis Tracker Pro</string>
+    <string name="main_title">Tennis\nTracker Pro</string>
+    <string name="tennis_tracker_icon_descipt">Tennis Tracker Icon</string>
+    <string name="new_match">New match</string>
+    <string name="clipboard_image">Clipboard image</string>
+    <string name="match_history">Match History</string>
+    <string name="line_graphic_image">Line graphic image</string>
+    <string name="statistics">Statistics</string>
+    <string name="top_bar_image">Top bar image</string>
+
+    // MATCH HISTORY
+    <string name="match_history_title">MATCH\nHISTORY</string>
+    <string name="options">Options</string>
+    <string name="filter">Filter:</string>
+    <string name="opponent">Opponent</string>
+    <string name="triangle_down_img">Triangle down img</string>
+
+    // ADD MATCH
+    <string name="add_match">Add\nMatch</string>
 </resources>

@@ -16,7 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_bar_main_page" />
+        app:srcCompat="@drawable/top_bar_main_page"
+        android:contentDescription="@string/top_bar_image" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -26,13 +27,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4"
-        app:srcCompat="@drawable/ttpro_ic_transp" />
+        app:srcCompat="@drawable/ttpro_ic_transp"
+        android:contentDescription="@string/tennis_tracker_icon_descipt" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tennis\nTracker Pro"
+        android:text="@string/main_title"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="50sp"
@@ -62,14 +64,15 @@
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_plus_black" />
+            app:srcCompat="@drawable/ic_plus_black"
+            android:contentDescription="@string/tennis_tracker_icon_descipt" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="New match"
+            android:text="@string/new_match"
             android:textColor="@color/colorTextBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView9"
@@ -97,14 +100,15 @@
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_clipboard_black" />
+            app:srcCompat="@drawable/ic_clipboard_black"
+            android:contentDescription="@string/clipboard_image" />
 
         <TextView
             android:id="@+id/textView7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Match History"
+            android:text="@string/match_history"
             android:textColor="@color/colorTextBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomof="@+id/imageView10"
@@ -133,14 +137,15 @@
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_graph_black" />
+            app:srcCompat="@drawable/ic_graph_black"
+            android:contentDescription="@string/line_graphic_image" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Statistics"
+            android:text="@string/statistics"
             android:textColor="@color/colorTextBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView8"
