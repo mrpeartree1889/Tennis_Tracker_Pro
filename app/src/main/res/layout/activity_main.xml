@@ -45,6 +45,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/newMatchBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -53,7 +54,7 @@
         android:background="@drawable/btn_yellow_landing"
         android:elevation="2dp"
         android:paddingVertical="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/clMatchHistory"
+        app:layout_constraintBottom_toTopOf="@+id/matchHistoryBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -62,10 +63,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/tennis_tracker_icon_descipt"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_plus_black"
-            android:contentDescription="@string/tennis_tracker_icon_descipt" />
+            app:srcCompat="@drawable/ic_plus_black" />
 
         <TextView
             android:id="@+id/textView8"
@@ -80,7 +81,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clMatchHistory"
+        android:id="@+id/matchHistoryBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
@@ -89,12 +90,12 @@
         android:background="@drawable/btn_yellow_landing"
         android:elevation="2dp"
         android:paddingVertical="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/clStat"
+        app:layout_constraintBottom_toTopOf="@+id/statisticsBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
-            android:id="@+id/imageView10"
+            android:id="@+id/clipboardImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -111,13 +112,12 @@
             android:text="@string/match_history"
             android:textColor="@color/colorTextBlack"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomof="@+id/imageView10"
-            app:layout_constraintStart_toEndOf="@+id/imageView10"
+            app:layout_constraintStart_toEndOf="@+id/clipboardImg"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/clStat"
+        android:id="@+id/statisticsBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"

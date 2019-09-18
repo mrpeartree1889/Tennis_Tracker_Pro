@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/off_white_bckg_small_radius"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Match #"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/colorTextGrey"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView22"
+            app:layout_constraintStart_toEndOf="@+id/textView22" />
+
+        <TextView
+            android:id="@+id/textView26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Opponent's name"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/myScoreMatchLo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/score_shape_history"
+            android:backgroundTint="@color/primaryColor"
+            android:text="@string/zero"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/oppScoreMatchLo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/oppScoreMatchLo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:background="@drawable/score_shape_history"
+            android:backgroundTint="@color/primaryColor"
+            android:text="@string/zero"
+            android:textColor="@android:color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="00/00/00"
+            android:textColor="@color/colorTextGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="Test Park"
+            android:textColor="@color/colorTextGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+
+        <ImageView
+            android:id="@+id/imageView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textView33"
+            app:layout_constraintTop_toBottomOf="@+id/textView33"
+            app:srcCompat="@drawable/ic_triangle_down_grey" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/matchBottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/matchTopLayout">
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/grey_line" />
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:stretchColumns="*"
+            android:weightSum="8"
+            app:layout_constraintBottom_toBottomOf="@+id/button5"
+            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/button3">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/textView35"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set #1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/textView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set #2"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/textView37"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set #3"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextGrey" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/you"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/textView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/opponent"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/btn_cancel"
+            android:paddingHorizontal="5dp"
+            android:text="Delete match"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_save"
+            android:backgroundTint="@color/primaryColorLight"
+            android:text="Edit match"
+            android:textColor="@color/primaryColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/button3"
+            app:layout_constraintStart_toStartOf="@+id/button3"
+            app:layout_constraintTop_toBottomOf="@+id/button3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
