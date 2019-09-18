@@ -21,4 +21,22 @@
     <string name="add_match">Add\nMatch</string>
     <string name="you">You</string>
     <string name="zero">0</string>
+    <string name="statistics">Statistics</string>
+    <string name="matches_won">Matches won</string>
+    <string name="matches_lost">Matches lost</string>
+    <string name="total_matches_played">Total matches played</string>
+    <string name="fifty_perc">50%</string>
+    <string name="sets_won">Sets won</string>
+    <string name="sets_lost">Sets lost</string>
+    <string name="courts">Courts</string>
+    <string name="won_vs_lost">Won vs Lost</string>
+    <string name="opponents">Opponents</string>
+    <string name="total_games_played">Total games played</string>
+    <string name="games_won">Games won</string>
+    <string name="games_lost">Games lost</string>
+    <string name="matches_won_to_lost">Matches won to lost</string>
+    <string name="one">1.00</string>
+    <string name="sets_won_to_lost">Sets won to lost</string>
+    <string name="games_won_to_lost">Games won to lost</string>
+    <string name="ratios">Ratios</string>
 </resources>
