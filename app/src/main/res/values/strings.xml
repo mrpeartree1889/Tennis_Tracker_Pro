@@ -19,4 +19,6 @@
 
     // ADD MATCH
     <string name="add_match">Add\nMatch</string>
+    <string name="you">You</string>
+    <string name="zero">0</string>
 </resources>
