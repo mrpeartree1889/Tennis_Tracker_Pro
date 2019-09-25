@@ -21,6 +21,26 @@
     <string name="add_match">Add\nMatch</string>
     <string name="you">You</string>
     <string name="zero">0</string>
+    <string name="cancel">Cancel</string>
+    <string name="opponent_s_name">Opponent\'s name</string>
+    <string name="court_opt">Court (opt)</string>
+    <string name="calendar_img">Calendar img</string>
+    <string name="date">Date</string>
+    <string name="today">Today</string>
+    <string name="pick_date">Pick date</string>
+    <string name="score">Score</string>
+    <string name="plus_button_img">Plus button img</string>
+    <string name="minus_button_image">Minus button image</string>
+    <string name="sets_opt">Sets (opt)</string>
+    <string name="tennis_player_img">Tennis player img</string>
+    <string name="court_img">Court img</string>
+    <string name="set_1">Set #1</string>
+    <string name="set_2">Set #2</string>
+    <string name="set_3">Set #3</string>
+    <string name="add_set">Add set</string>
+    <string name="save_match">Save match</string>
+
+    // STATISTICS
     <string name="matches_won">Matches won</string>
     <string name="matches_lost">Matches lost</string>
     <string name="total_matches_played">Total matches played</string>
@@ -38,4 +58,5 @@
     <string name="sets_won_to_lost">Sets won to lost</string>
     <string name="games_won_to_lost">Games won to lost</string>
     <string name="ratios">Ratios</string>
+
 </resources>
