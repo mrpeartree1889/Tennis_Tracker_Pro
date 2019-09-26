@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_match.*
@@ -13,129 +14,135 @@ import org.jetbrains.anko.toast
 
 class AddMatch : AppCompatActivity() {
 
-    // 0 no winner, 1 my win, 2 opponent win
-    private var setOneWinner = 0
-    private var setTwoWinner = 0
-    private var setThreeWinner = 0
-    private var setFourWinner = 0
-    private var setFiveWinner = 0
-    private var setSixWinner = 0
-    private var setSevenWinner = 0
-    private var setEightWinner = 0
-    private var setNineWinner = 0
-    private var setTenWinner = 0
-    // 0 is match score, 1 is set score
-    private var scoreState = 0
+    // SCORING METHOD : 1 is through match overall, 2 is through set
+    private var scoringMethod = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_match)
 
-
-        saveBtn.setOnClickListener() {
-            val intent = Intent(this, MatchHistory::class.java)
-            clearEdits()
-            startActivity(intent)
-        }
-
-        cancelBtn.setOnClickListener() {
-            val intent = Intent(this, MatchHistory::class.java)
-            clearEdits()
-            startActivity(intent)
-        }
-
+        // SCORING
+        // MATCH SCORING BTNS
         plusBtnYou.setOnClickListener { scoreMatchPlus(myScore) }
         minusBtnYou.setOnClickListener { scoreMatchMinus(myScore) }
-
         plusBtnOpp.setOnClickListener { scoreMatchPlus(oppScore) }
-        minusBtnOpp.setOnClickListener {scoreMatchMinus(oppScore) }
+        minusBtnOpp.setOnClickListener { scoreMatchMinus(oppScore) }
 
-        plusBtnYouSet1.setOnClickListener {
-            scoreSetPlus(scoreYouSet1)
-            setOneWinner = setWinner(scoreYouSet1, scoreOppSet1)
-            updateMatchScore(myScore, oppScore)
+        // SET SCORING BTNS
+        // SET 1
+        plusBtnYouSet1.setOnClickListener { plusSetScore(scoreYouSet1) }
+        minusBtnYouSet1.setOnClickListener { minusSetScore(scoreYouSet1)}
+        plusBtnOppSet1.setOnClickListener {plusSetScore(scoreOppSet1)}
+        minusBtnOppSet1.setOnClickListener {minusSetScore(scoreOppSet1)}
+        // SET 2
+        plusBtnYouSet2.setOnClickListener { plusSetScore(scoreYouSet2) }
+        minusBtnYouSet2.setOnClickListener { minusSetScore(scoreYouSet2)}
+        plusBtnOppSet2.setOnClickListener {plusSetScore(scoreOppSet2)}
+        minusBtnOppSet2.setOnClickListener {minusSetScore(scoreOppSet2)}
+        // SET 3
+        plusBtnYouSet3.setOnClickListener { plusSetScore(scoreYouSet3) }
+        minusBtnYouSet3.setOnClickListener { minusSetScore(scoreYouSet3)}
+        plusBtnOppSet3.setOnClickListener {plusSetScore(scoreOppSet3)}
+        minusBtnOppSet3.setOnClickListener {minusSetScore(scoreOppSet3)}
+        // SET 4
+        plusBtnYouSet4.setOnClickListener { plusSetScore(scoreYouSet4) }
+        minusBtnYouSet4.setOnClickListener { minusSetScore(scoreYouSet4)}
+        plusBtnOppSet4.setOnClickListener {plusSetScore(scoreOppSet4)}
+        minusBtnOppSet4.setOnClickListener {minusSetScore(scoreOppSet4)}
+        // SET 5
+        plusBtnYouSet5.setOnClickListener { plusSetScore(scoreYouSet5) }
+        minusBtnYouSet5.setOnClickListener { minusSetScore(scoreYouSet5)}
+        plusBtnOppSet5.setOnClickListener {plusSetScore(scoreOppSet5)}
+        minusBtnOppSet5.setOnClickListener {minusSetScore(scoreOppSet5)}
+        // SET 6
+        plusBtnYouSet6.setOnClickListener { plusSetScore(scoreYouSet6) }
+        minusBtnYouSet6.setOnClickListener { minusSetScore(scoreYouSet6)}
+        plusBtnOppSet6.setOnClickListener {plusSetScore(scoreOppSet6)}
+        minusBtnOppSet6.setOnClickListener {minusSetScore(scoreOppSet6)}
+        // SET 7
+        plusBtnYouSet7.setOnClickListener { plusSetScore(scoreYouSet7) }
+        minusBtnYouSet7.setOnClickListener { minusSetScore(scoreYouSet7)}
+        plusBtnOppSet7.setOnClickListener {plusSetScore(scoreOppSet7)}
+        minusBtnOppSet7.setOnClickListener {minusSetScore(scoreOppSet7)}
+        // SET 8
+        plusBtnYouSet8.setOnClickListener { plusSetScore(scoreYouSet8) }
+        minusBtnYouSet8.setOnClickListener { minusSetScore(scoreYouSet8)}
+        plusBtnOppSet8.setOnClickListener {plusSetScore(scoreOppSet8)}
+        minusBtnOppSet8.setOnClickListener {minusSetScore(scoreOppSet8)}
+        // SET 9
+        plusBtnYouSet9.setOnClickListener { plusSetScore(scoreYouSet9) }
+        minusBtnYouSet9.setOnClickListener { minusSetScore(scoreYouSet9)}
+        plusBtnOppSet9.setOnClickListener {plusSetScore(scoreOppSet9)}
+        minusBtnOppSet9.setOnClickListener {minusSetScore(scoreOppSet9)}
+        // SET 10
+        plusBtnYouSet10.setOnClickListener { plusSetScore(scoreYouSet10) }
+        minusBtnYouSet10.setOnClickListener { minusSetScore(scoreYouSet10)}
+        plusBtnOppSet10.setOnClickListener {plusSetScore(scoreOppSet10)}
+        minusBtnOppSet10.setOnClickListener {minusSetScore(scoreOppSet10)}
+
+        // SAVE AND CANCEL BUTTONS
+        saveBtn.setOnClickListener {
+            val intent = Intent(this, MatchHistory::class.java)
+            clearEdits()
+            startActivity(intent)
         }
 
-        minusBtnYouSet1.setOnClickListener {
-            scoreSetMinus(scoreYouSet1)
-            setOneWinner = setWinner(scoreYouSet1, scoreOppSet1)
-            updateMatchScore(myScore, oppScore)
+        cancelBtn.setOnClickListener {
+            val intent = Intent(this, MatchHistory::class.java)
+            clearEdits()
+            startActivity(intent)
         }
-
-        plusBtnOppSet1.setOnClickListener {
-            scoreSetPlus(scoreOppSet1)
-            setOneWinner = setWinner(scoreYouSet1, scoreOppSet1)
-            updateMatchScore(myScore, oppScore)
-        }
-
-        minusBtnOppSet1.setOnClickListener {
-            scoreSetMinus(scoreOppSet1)
-            setOneWinner = setWinner(scoreYouSet1, scoreOppSet1)
-            updateMatchScore(myScore, oppScore)
-        }
-
-
-
-
-
-
-
 
     }
 
 
-
-    private fun updateMatchScore(mySetScoreTextView: TextView, oppSetScoreTextView: TextView) {
-        var myScoreLocal = 0
-        var oppScoreLocal = 0
-
-        if (setOneWinner == 1) {myScoreLocal += 1}
-        else if (setOneWinner == 2) {oppScoreLocal += 1}
-
-        if (setTwoWinner == 1) {myScoreLocal += 1}
-        else if (setTwoWinner == 2) {oppScoreLocal += 1}
-
-        if (setThreeWinner == 1) {myScoreLocal += 1}
-        else if (setThreeWinner == 2) {oppScoreLocal += 1}
-
-        if (setFourWinner == 1) {myScoreLocal += 1}
-        else if (setFourWinner == 2) {oppScoreLocal += 1}
-
-        if (setFiveWinner == 1) {myScoreLocal += 1}
-        else if (setFiveWinner == 2) {oppScoreLocal += 1}
-
-        if (setSixWinner == 1) {myScoreLocal += 1}
-        else if (setSixWinner == 2) {oppScoreLocal += 1}
-
-        if (setSevenWinner == 1) {myScoreLocal += 1}
-        else if (setSevenWinner == 2) {oppScoreLocal += 1}
-
-        if (setEightWinner == 1) {myScoreLocal += 1}
-        else if (setEightWinner == 2) {oppScoreLocal += 1}
-
-        if (setNineWinner == 1) {myScoreLocal += 1}
-        else if (setNineWinner == 2) {oppScoreLocal += 1}
-
-        if (setTenWinner == 1) {myScoreLocal += 1}
-        else if (setTenWinner == 2) {oppScoreLocal += 1}
-
-        mySetScoreTextView.text = myScoreLocal.toString()
-        oppSetScoreTextView.text = oppScoreLocal.toString()
+    private fun plusSetScore (setMyScore : TextView) {
+        // CHECK IF MATCH SCORE IS ALREADY PRESENT
+        // if true it means match is already present
+        if (scoringMethod == 1 && (myScore.text.toString().toInt() != 0 || oppScore.text.toString().toInt() != 0)) {
+            alert {
+                title = "Attention"
+                message = "There is already a score for the match. If you want to proceed, that score will be erased."
+                positiveButton("Proceed") {
+                    clearScore()
+                    setMyScore.text = (setMyScore.text.toString().toInt() + 1).toString()
+                    updateMatchScore()
+                    scoringMethod = 2
+                }
+                negativeButton ("Cancel") {}
+            }.show()
+        } else {
+            setMyScore.text = (setMyScore.text.toString().toInt() + 1).toString()
+            updateMatchScore()
+            scoringMethod = 2
+        }
     }
 
-    fun addSetPlusBtnClicked(view: View) {
-        when {
-            ninthSetLayout.isVisible -> {
-                tenthSetLayout.visibility = View.VISIBLE
-                addSetLayout.visibility = View.GONE
+    private fun minusSetScore (setMyScore : TextView) {
+        // CHECK IF MATCH SCORE IS ALREADY PRESENT
+        // if true it means match is already present
+        if(setMyScore.text.toString().toInt() == 0) {
+            toast("Score can't be negative")
+        } else {
+            if (scoringMethod == 1 && (myScore.text.toString().toInt() != 0 || oppScore.text.toString().toInt() != 0)) {
+                alert {
+                    title = "Attention"
+                    message =
+                        "There is already a score for the match. If you want to proceed, that score will be erased."
+                    positiveButton("Proceed") {
+                        clearScore()
+                        setMyScore.text = (setMyScore.text.toString().toInt() - 1).toString()
+                        updateMatchScore()
+                        scoringMethod = 2
+                    }
+                    negativeButton("Cancel") {}
+                }.show()
+            } else {
+                setMyScore.text = (setMyScore.text.toString().toInt() - 1).toString()
+                updateMatchScore()
+                scoringMethod = 2
             }
-            eighthSetLayout.isVisible -> ninthSetLayout.visibility = View.VISIBLE
-            seventhSetLayout.isVisible -> eighthSetLayout.visibility = View.VISIBLE
-            sixthSetLayout.isVisible -> seventhSetLayout.visibility = View.VISIBLE
-            fifthSetLayout.isVisible -> sixthSetLayout.visibility = View.VISIBLE
-            fourthSetLayout.isVisible -> fifthSetLayout.visibility = View.VISIBLE
         }
-        if (!fourthSetLayout.isVisible) {fourthSetLayout.visibility = View.VISIBLE}
     }
 
     private fun scoreMatchPlus (textView: TextView) {
@@ -145,15 +152,18 @@ class AddMatch : AppCompatActivity() {
                 message = "There are already scores on individual sets. If you want to proceed, those scores will be erased."
                 positiveButton("Proceed") {
                     textView.text = (textView.text.toString().toInt() + 1).toString()
-                    scoreState = 0
+                    scoringMethod = 1
                     clearSetScores()
                 }
                 negativeButton ("Cancel") {Log.d("myError", "negative response")}
             }.show()
         } else {
             textView.text = (textView.text.toString().toInt() + 1).toString()
+            scoringMethod = 1
         }
     }
+
+
 
     private fun scoreMatchMinus(textView: TextView) {
         val score = textView.text.toString().toInt()
@@ -164,86 +174,101 @@ class AddMatch : AppCompatActivity() {
                     message = "There are already scores on individual sets. If you want to proceed, those scores will be erased."
                     positiveButton("Proceed") {
                         textView.text = (textView.text.toString().toInt() - 1).toString()
-                        scoreState = 0
+                        scoringMethod = 1
                         clearSetScores()
                     }
                     negativeButton ("Cancel") {Log.d("myError", "negative response")}
                 }.show()
             } else {
                 textView.text = (textView.text.toString().toInt() - 1).toString()
+                scoringMethod = 1
             }
         } else {
-            toast("Score can't be below 0")
+            toast("Score can't be negative")
         }
     }
 
-    private fun scoreSetPlus (textView: TextView) {
-        if (checkMatchScore() && scoreState == 0) {
-            alert {
-                title = "Alert"
-                message = "There are already scores for the overall match. If you want to proceed, those scores will be erased."
-                positiveButton("Proceed") {
-                    textView.text = (textView.text.toString().toInt() + 1).toString()
-                    scoreState = 1
-                    clearScore()
-                }
-                negativeButton ("Cancel") {Log.d("myError", "negative response")}
-            }.show()
-        } else {
-            textView.text = (textView.text.toString().toInt() + 1).toString()
-            scoreState = 1
-        }
-    }
+    // DEFINE OVERALL SCORE BASED ON SET SCORES
+    private fun updateMatchScore() {
+        var localMyScore = 0
+        var localOppScore = 0
 
-    private fun scoreSetMinus(textView: TextView) {
-        val score = textView.text.toString().toInt()
-        if (score > 0) {
-            if (checkMatchScore() && scoreState == 0) {
-                alert {
-                    title = "Alert"
-                    message = "There are already scores for the overall match. If you want to proceed, those scores will be erased."
-                    positiveButton("Proceed") {
-                        textView.text = (textView.text.toString().toInt() - 1).toString()
-                        scoreState = 1
-                        clearSetScores()
-                    }
-                    negativeButton ("Cancel") {Log.d("myError", "negative response")}
-                }.show()
-            } else {
-                textView.text = (textView.text.toString().toInt() - 1).toString()
-                scoreState = 1
-            }
-        } else {
-            toast("Set score can't be below 0")
-        }
-    }
-
-
-
-    private fun setWinner(mySetScoreTextView : TextView, oppSetScoreTextView : TextView) : Int {
-        val mySetScore = mySetScoreTextView.text.toString().toInt()
-        val oppSetScore = oppSetScoreTextView.text.toString().toInt()
-        var result = 0
-
-        when {
-            mySetScore == oppSetScore -> result = 0
-            mySetScore > oppSetScore -> result = 1
-            mySetScore < oppSetScore -> result = 2
+        // set one score
+        if(scoreYouSet1.text.toString().toInt() > scoreOppSet1.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet1.text.toString().toInt() < scoreOppSet1.text.toString().toInt()) {
+            localOppScore += 1
         }
 
-        return result
+        // set two score
+        if(scoreYouSet2.text.toString().toInt() > scoreOppSet2.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet2.text.toString().toInt() < scoreOppSet2.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set three score
+        if(scoreYouSet3.text.toString().toInt() > scoreOppSet3.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet3.text.toString().toInt() < scoreOppSet3.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set four score
+        if(scoreYouSet4.text.toString().toInt() > scoreOppSet4.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet4.text.toString().toInt() < scoreOppSet4.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set five score
+        if(scoreYouSet5.text.toString().toInt() > scoreOppSet5.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet5.text.toString().toInt() < scoreOppSet5.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set six score
+        if(scoreYouSet6.text.toString().toInt() > scoreOppSet6.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet6.text.toString().toInt() < scoreOppSet6.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set seven score
+        if(scoreYouSet7.text.toString().toInt() > scoreOppSet7.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet7.text.toString().toInt() < scoreOppSet7.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set eight score
+        if(scoreYouSet8.text.toString().toInt() > scoreOppSet8.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet8.text.toString().toInt() < scoreOppSet8.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set nine score
+        if(scoreYouSet9.text.toString().toInt() > scoreOppSet9.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet9.text.toString().toInt() < scoreOppSet9.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // set ten score
+        if(scoreYouSet10.text.toString().toInt() > scoreOppSet10.text.toString().toInt()) {
+            localMyScore += 1
+        } else if(scoreYouSet10.text.toString().toInt() < scoreOppSet10.text.toString().toInt()) {
+            localOppScore += 1
+        }
+
+        // ASSIGN VALUES TO TEXTVIEW
+        myScore.text = localMyScore.toString()
+        oppScore.text = localOppScore.toString()
     }
 
-    private fun checkMatchScore() : Boolean {
-        var bool = false
-        if (
-            myScore.text.toString().toInt() != 0 ||
-            oppScore.text.toString().toInt() != 0
-                ) {bool = true}
-        // true means there are scores on the match
-        // false means there are NO scores on the match
-        return bool
-    }
+    // CHECK IF THERE ARE ANY SET SCORES
     private fun checkSetsScore() : Boolean {
         var bool = false
         if (
@@ -272,6 +297,50 @@ class AddMatch : AppCompatActivity() {
         // false means there are NO scores on the sets
         return bool
     }
+
+    // ADD AND REMOVE SET BUTTONS
+    fun addSetPlusBtnClicked (view: View) {
+        when {
+            ninthSetLayout.isVisible -> {
+                tenthSetLayout.visibility = View.VISIBLE
+                addSetLayout.visibility = View.INVISIBLE
+            }
+            eighthSetLayout.isVisible -> ninthSetLayout.visibility = View.VISIBLE
+            seventhSetLayout.isVisible -> eighthSetLayout.visibility = View.VISIBLE
+            sixthSetLayout.isVisible -> seventhSetLayout.visibility = View.VISIBLE
+            fifthSetLayout.isVisible -> sixthSetLayout.visibility = View.VISIBLE
+            fourthSetLayout.isVisible -> fifthSetLayout.visibility = View.VISIBLE
+            thirdSetLayout.isVisible -> fourthSetLayout.visibility = View.VISIBLE
+            secondSetLayout.isVisible -> thirdSetLayout.visibility = View.VISIBLE
+        }
+        if (!secondSetLayout.isVisible) {
+            secondSetLayout.visibility = View.VISIBLE
+            removeSetLayout.visibility = View.VISIBLE
+        }
+    }
+
+    fun removeSetMinusBtnClicked(view: View) {
+        when {
+            tenthSetLayout.isVisible -> {
+                tenthSetLayout.visibility = View.GONE
+                addSetLayout.visibility = View.VISIBLE
+            }
+            ninthSetLayout.isVisible -> ninthSetLayout.visibility = View.GONE
+            eighthSetLayout.isVisible -> eighthSetLayout.visibility = View.GONE
+            seventhSetLayout.isVisible -> seventhSetLayout.visibility = View.GONE
+            sixthSetLayout.isVisible -> sixthSetLayout.visibility = View.GONE
+            fifthSetLayout.isVisible -> fifthSetLayout.visibility = View.GONE
+            fourthSetLayout.isVisible -> fourthSetLayout.visibility = View.GONE
+            thirdSetLayout.isVisible -> thirdSetLayout.visibility = View.GONE
+            secondSetLayout.isVisible -> {
+                secondSetLayout.visibility = View.GONE
+                removeSetLayout.visibility = View.INVISIBLE
+            }
+
+        }
+    }
+
+    // CLEAR SCORE AND TEXT FUNCTIONS
 
     private fun clearScore() {
         myScore.text = "0"

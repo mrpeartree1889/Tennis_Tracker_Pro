@@ -12,17 +12,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        newMatchBtn.setOnClickListener() {
+        newMatchBtn.setOnClickListener {
             val intent = Intent(this, AddMatch::class.java)
             startActivity(intent)
         }
 
-        matchHistoryBtn.setOnClickListener() {
+        matchHistoryBtn.setOnClickListener {
             val intent = Intent(this, MatchHistory::class.java)
             startActivity(intent)
         }
 
-        statisticsBtn.setOnClickListener() {
+        statisticsBtn.setOnClickListener {
             val intent = Intent(this, Statistics::class.java)
             startActivity(intent)
         }
