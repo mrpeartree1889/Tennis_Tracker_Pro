@@ -1,6 +1,8 @@
 package com.example.tennistrackerpro
 
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +13,10 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity_add_match.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class AddMatch : AppCompatActivity() {
 
@@ -96,6 +102,41 @@ class AddMatch : AppCompatActivity() {
     }
 
 
+    //SET DATE BUTTONS
+    fun pickDateBtnClicked(view: View) {
+        pickDateBtn.setTextColor(Color.parseColor("#4CAF50"))
+        todayBtn.setTextColor(Color.parseColor("#804CAF50"))
+        // CALENDAR
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { datePicker, mYear, mMonth, mDay ->
+
+            c.set(Calendar.YEAR, mYear)
+            c.set(Calendar.MONTH,mMonth)
+            c.set(Calendar.DAY_OF_MONTH,mDay)
+            val formatter = "yyyy/MM/dd"
+            val sdf = SimpleDateFormat(formatter, Locale.US)
+            val formatted = sdf.format(c.time)
+
+            date.text = formatted.toString()
+        }, year, month, day)
+
+        dpd.show()
+    }
+    fun todayBtnClicked(view:View) {
+        pickDateBtn.setTextColor(Color.parseColor("#804CAF50"))
+        todayBtn.setTextColor(Color.parseColor("#4CAF50"))
+        val c = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
+        val formatted = c.format(formatter)
+        date.text = formatted.toString()
+    }
+
+
+    // PLUS AND MINUS BUTTONS
     private fun plusSetScore (setMyScore : TextView) {
         // CHECK IF MATCH SCORE IS ALREADY PRESENT
         // if true it means match is already present
