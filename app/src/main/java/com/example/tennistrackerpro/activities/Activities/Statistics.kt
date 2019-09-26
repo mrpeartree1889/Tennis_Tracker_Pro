@@ -1,8 +1,9 @@
-package com.example.tennistrackerpro
+package com.example.tennistrackerpro.activities.Activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.tennistrackerpro.R
 import kotlinx.android.synthetic.main.activity_statistics.*
 
 class Statistics : AppCompatActivity() {

@@ -5,6 +5,8 @@
     android:id="@+id/linearLayout4"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/off_white_bckg_small_radius"
     android:orientation="vertical">
 
@@ -21,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="Match #"
             android:textColor="@color/colorTextGrey"
             android:textSize="24sp"
@@ -29,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/matchIdText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
@@ -39,24 +40,26 @@
             app:layout_constraintStart_toEndOf="@+id/textView22" />
 
         <TextView
-            android:id="@+id/textView26"
-            android:layout_width="wrap_content"
+            android:id="@+id/matchOpponent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="4dp"
             android:text="Opponent's name"
             android:textColor="@color/colorTextBlack"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/myScoreMatchLo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
         <TextView
             android:id="@+id/myScoreMatchLo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/score_shape_history"
-            android:backgroundTint="@color/primaryColor"
+            android:background="@drawable/green_bckg_bottom_radius"
+            android:padding="10dp"
             android:text="@string/zero"
             android:textColor="@android:color/white"
             android:textSize="24sp"
@@ -69,8 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="100dp"
-            android:background="@drawable/score_shape_history"
-            android:backgroundTint="@color/primaryColor"
+            android:background="@drawable/green_bckg_bottom_radius"
+            android:padding="10dp"
             android:text="@string/zero"
             android:textColor="@android:color/white"
             android:textSize="24sp"
@@ -79,7 +82,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView31"
+            android:id="@+id/matchDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -90,30 +93,42 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView33"
+            android:id="@+id/courtName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="Test Park"
             android:textColor="@color/colorTextGrey"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView31" />
+            app:layout_constraintTop_toBottomOf="@+id/matchDate" />
 
         <ImageView
-            android:id="@+id/imageView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:id="@+id/downButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textView33"
-            app:layout_constraintTop_toBottomOf="@+id/textView33"
+            app:layout_constraintEnd_toEndOf="@+id/courtName"
+            app:layout_constraintTop_toBottomOf="@+id/courtName"
             app:srcCompat="@drawable/ic_triangle_down_grey" />
+
+        <ImageView
+            android:id="@+id/upButton"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="4dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/courtName"
+            app:layout_constraintTop_toBottomOf="@+id/courtName"
+            app:srcCompat="@drawable/ic_triangle_up_grey" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/matchBottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -133,154 +148,453 @@
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:stretchColumns="*"
             android:weightSum="8"
-            app:layout_constraintBottom_toBottomOf="@+id/button5"
-            app:layout_constraintEnd_toStartOf="@+id/button3"
+            app:layout_constraintBottom_toBottomOf="@+id/editMatchBtn"
+            app:layout_constraintEnd_toStartOf="@+id/deleteMatchBtn"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/button3">
+            app:layout_constraintTop_toTopOf="@+id/deleteMatchBtn">
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2">
+                android:layout_weight="2"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView34"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
                     android:id="@+id/textView35"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Set #1"
+                    android:layout_weight="1"
+                    android:text="@string/you"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
                     android:id="@+id/textView36"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Set #2"
+                    android:layout_weight="1"
+                    android:text="@string/opponent"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextGrey" />
 
-                <TextView
-                    android:id="@+id/textView37"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Set #3"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorTextGrey" />
             </TableRow>
 
             <TableRow
+                android:id="@+id/rowSet1"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_weight="3">
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
 
                 <TextView
                     android:id="@+id/textView38"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/you"
+                    android:layout_weight="1"
+                    android:text="@string/set_1"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
-                    android:id="@+id/textView40"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/myScoreSet1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/zero"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack" />
 
                 <TextView
-                    android:id="@+id/textView42"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/oppScoreSet1"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/zero"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack" />
 
-                <TextView
-                    android:id="@+id/textView41"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/zero"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorTextBlack" />
             </TableRow>
 
             <TableRow
+                android:id="@+id/rowSet2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3">
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/textView39"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/setTitle2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/opponent"
+                    android:layout_weight="1"
+                    android:text="@string/set_2"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
-                    android:id="@+id/textView43"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/myScoreSet2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/zero"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack" />
 
                 <TextView
-                    android:id="@+id/textView44"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/oppScoreSet2"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet3"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/set_3"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/zero"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack" />
 
                 <TextView
-                    android:id="@+id/textView45"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/oppScoreSet3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/zero"
                     android:textAlignment="center"
                     android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet4"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/set_4"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet5"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Set #5"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet5"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet6"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Set #6"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet7"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Set #7"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet7"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet8"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/set_8"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet8"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet9"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/set_9"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/rowSet10"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:weightSum="3">
+
+                <TextView
+                    android:id="@+id/setTitle10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/set_10"
+                    android:textColor="@color/colorTextGrey" />
+
+                <TextView
+                    android:id="@+id/myScoreSet10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
+                <TextView
+                    android:id="@+id/oppScoreSet10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/zero"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorTextBlack" />
+
             </TableRow>
 
         </TableLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/deleteMatchBtn"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/btn_cancel"
             android:paddingHorizontal="5dp"
             android:text="Delete match"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toTopOf="@+id/editMatchBtn"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/editMatchBtn"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_save"
             android:backgroundTint="@color/primaryColorLight"
             android:text="Edit match"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/button3"
-            app:layout_constraintStart_toStartOf="@+id/button3"
-            app:layout_constraintTop_toBottomOf="@+id/button3" />
+            app:layout_constraintEnd_toEndOf="@+id/deleteMatchBtn"
+            app:layout_constraintStart_toStartOf="@+id/deleteMatchBtn" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="20dp"
+            android:layout_height="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/deleteMatchBtn"
+            app:layout_constraintEnd_toEndOf="@+id/deleteMatchBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

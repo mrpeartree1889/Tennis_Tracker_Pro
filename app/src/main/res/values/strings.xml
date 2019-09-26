@@ -13,9 +13,14 @@
     // MATCH HISTORY
     <string name="match_history_title">MATCH\nHISTORY</string>
     <string name="options">Options</string>
-    <string name="filter">Filter:</string>
+    <string name="filter">Filter: </string>
     <string name="opponent">Opponent</string>
     <string name="triangle_down_img">Triangle down img</string>
+    <string name="remove_set">Remove set</string>
+    <string name="set_4">Set #4</string>
+    <string name="set_8">Set #8</string>
+    <string name="set_10">Set #10</string>
+    <string name="set_9">Set #9</string>
 
     // ADD MATCH
     <string name="add_match">Add\nMatch</string>
@@ -58,6 +63,8 @@
     <string name="sets_won_to_lost">Sets won to lost</string>
     <string name="games_won_to_lost">Games won to lost</string>
     <string name="ratios">Ratios</string>
-    <string name="remove_set">Remove set</string>
+
+
+
 
 </resources>

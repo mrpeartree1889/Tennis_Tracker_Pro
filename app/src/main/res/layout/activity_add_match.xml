@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:clickable="false"
-    tools:context=".AddMatch">
+    tools:context=".activities.Activities.AddMatch">
 
     <ImageView
         android:id="@+id/topBar"

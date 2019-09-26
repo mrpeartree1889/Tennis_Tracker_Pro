@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Statistics"></activity>
-        <activity android:name=".AddMatch" />
-        <activity android:name=".MatchHistory" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.Activities.Statistics"></activity>
+        <activity android:name=".activities.Activities.AddMatch" />
+        <activity android:name=".activities.Activities.MatchHistory" />
+        <activity android:name=".activities.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

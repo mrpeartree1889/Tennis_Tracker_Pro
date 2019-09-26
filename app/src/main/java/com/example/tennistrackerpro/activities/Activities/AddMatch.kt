@@ -1,4 +1,4 @@
-package com.example.tennistrackerpro
+package com.example.tennistrackerpro.activities.Activities
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -7,9 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.view.isVisible
+import com.example.tennistrackerpro.R
+import com.example.tennistrackerpro.activities.DBHandler
+import com.example.tennistrackerpro.activities.Models.Match
 import kotlinx.android.synthetic.main.activity_add_match.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
@@ -20,12 +22,17 @@ import java.util.*
 
 class AddMatch : AppCompatActivity() {
 
+    companion object { lateinit var dbHandler: DBHandler }
+
     // SCORING METHOD : 1 is through match overall, 2 is through set
     private var scoringMethod = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_match)
+
+        // FIRE UP DATABASE
+        dbHandler = DBHandler(this, null, null, 1)
 
         // SCORING
         // MATCH SCORING BTNS
@@ -88,6 +95,7 @@ class AddMatch : AppCompatActivity() {
 
         // SAVE AND CANCEL BUTTONS
         saveBtn.setOnClickListener {
+            saveGameFun()
             val intent = Intent(this, MatchHistory::class.java)
             clearEdits()
             startActivity(intent)
@@ -378,6 +386,100 @@ class AddMatch : AppCompatActivity() {
                 removeSetLayout.visibility = View.INVISIBLE
             }
 
+        }
+    }
+
+    // SAVE GAME FUNC
+    private fun saveGameFun() {
+        val match = Match()
+
+        when {
+            // CHECK IF MAIN VARS ARE EMPTY - OPPONENT NAME, DATE AND SCORE
+            opponentsName.text.isEmpty() -> {
+                toast("Enter opponent's name")
+                opponentsName.requestFocus()
+            }
+
+            date.text.isEmpty() -> {
+                toast("Select a date")
+                date.requestFocus()
+            }
+
+            myScore.text.toString().toInt() == 0 && oppScore.text.toString().toInt() == 0  -> {
+                toast("Enter match score or enter set scores")
+                date.requestFocus()
+            }
+        }
+
+        // IF THE MAIN VARS ARE FILLED, FINISH THE ACTIVITY AND SAVE THE DATA TO THE MATCH CLASS
+        if (opponentsName.text.isNotEmpty() && date.text.isNotEmpty() && myScore.text.isNotEmpty() && oppScore.text.isNotEmpty()) {
+
+            // IF COURT NAME NOT FILLED THEN PUT NO VALUE ON IT
+            if (courtName.text.isEmpty()) {
+                match.courtName = ""
+            } else {
+                match.courtName = courtName.text.toString()
+            }
+
+            // SET VALUES TO MATCH CLASS
+            match.opponentName = opponentsName.text.toString()
+            match.date = date.text.toString()
+            match.myScore = myScore.text.toString().toInt()
+            match.opponentScore = oppScore.text.toString().toInt()
+
+            // ONLY STORE SCORES THAT WERE RECORDED ON THE FORM
+            if (scoreYouSet1.text.toString().toInt() != 0 && scoreOppSet1.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet1.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet1.text.toString().toInt()
+            }
+
+            if (scoreYouSet2.text.toString().toInt() != 0 && scoreOppSet2.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet2.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet2.text.toString().toInt()
+            }
+
+            if (scoreYouSet3.text.toString().toInt() != 0 && scoreOppSet3.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet3.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet3.text.toString().toInt()
+            }
+
+            if (scoreYouSet4.text.toString().toInt() != 0 && scoreOppSet4.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet4.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet4.text.toString().toInt()
+            }
+
+            if (scoreYouSet5.text.toString().toInt() != 0 && scoreOppSet5.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet5.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet5.text.toString().toInt()
+            }
+
+            if (scoreYouSet6.text.toString().toInt() != 0 && scoreOppSet6.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet6.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet6.text.toString().toInt()
+            }
+
+            if (scoreYouSet7.text.toString().toInt() != 0 && scoreOppSet7.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet7.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet7.text.toString().toInt()
+            }
+
+            if (scoreYouSet8.text.toString().toInt() != 0 && scoreOppSet8.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet8.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet8.text.toString().toInt()
+            }
+
+            if (scoreYouSet9.text.toString().toInt() != 0 && scoreOppSet9.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet9.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet9.text.toString().toInt()
+            }
+
+            if (scoreYouSet10.text.toString().toInt() != 0 && scoreOppSet10.text.toString().toInt() != 0) {
+                match.firstSetMyScore = scoreYouSet10.text.toString().toInt()
+                match.firstSetOpponentScore = scoreOppSet10.text.toString().toInt()
+            }
+
+            // ADD MATCH CLASS TO DB, CLEAR EDITS ON FORM AND GO TO MATCH HISTORY ACTIVITY
+            dbHandler.addMatch(this, match)
         }
     }
 
