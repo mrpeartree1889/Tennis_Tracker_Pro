@@ -679,14 +679,14 @@
         app:layout_constraintTop_toBottomOf="@+id/gamesPlayedLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
+            android:id="@+id/matchHistoryLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:background="@drawable/btn_yellow_landing"
             android:paddingHorizontal="8dp"
             android:paddingVertical="4dp"
-            app:layout_constraintEnd_toStartOf="@+id/constraintLayout5"
+            app:layout_constraintEnd_toStartOf="@+id/newMatchLayout"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -717,7 +717,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout5"
+            android:id="@+id/newMatchLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_yellow_landing"
@@ -725,7 +725,7 @@
             android:paddingVertical="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+            app:layout_constraintStart_toEndOf="@+id/matchHistoryLayout"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
