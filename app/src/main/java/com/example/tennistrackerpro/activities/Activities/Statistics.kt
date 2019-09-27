@@ -3,11 +3,13 @@ package com.example.tennistrackerpro.activities.Activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import com.example.tennistrackerpro.R
 import com.example.tennistrackerpro.activities.DBHandler
 import com.example.tennistrackerpro.activities.Models.Statistics
 import kotlinx.android.synthetic.main.activity_statistics.*
+import org.jetbrains.anko.alert
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import kotlin.math.roundToInt
@@ -88,5 +90,13 @@ class Statistics : AppCompatActivity() {
         matchRatio.text = df.format(matchesWon.toFloat() / matchesLost.toFloat()).toString()
         setRatio.text = df.format(setsWonScore.toFloat() / setsLostScore.toFloat()).toString()
         gamesRatio.text = df.format(gamesWonScore.toFloat() / gamesLostScore.toFloat()).toString()
+    }
+
+    fun ratioInfoBtnClicked(view: View) {
+        alert {
+            title = "Ratios"
+            message = "Ratios represent a win vs loss value. A match ratio of 1.2 means that you won 1.2 games for every game you lost. Generally, a ratio higher than 1 means you won more than you lost."
+            positiveButton("Ok!") {}
+        }.show()
     }
 }

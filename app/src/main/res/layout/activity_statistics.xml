@@ -97,18 +97,33 @@
         app:layout_constraintTop_toBottomOf="@+id/courtsLayout">
 
 
+        <ImageButton
+            android:id="@+id/ratioInfoBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@android:color/transparent"
+            android:baselineAlignBottom="false"
+            android:cropToPadding="false"
+            android:onClick="ratioInfoBtnClicked"
+            android:scaleType="center"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView29"
+            app:srcCompat="@drawable/ic_info_outline_black_24dp" />
+
         <TextView
             android:id="@+id/textView29"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ratios"
             android:textColor="@color/colorTextGrey"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TableLayout
+            android:id="@+id/tableLayout2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:weightSum="3"
@@ -128,7 +143,7 @@
                     android:id="@+id/matchRatioTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:text="@string/matches_won_to_lost"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="12sp" />
@@ -137,11 +152,11 @@
                     android:id="@+id/matchRatio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:text="@string/one"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="center"
                     android:textColor="@color/colorTextBlack"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -156,7 +171,7 @@
                     android:id="@+id/setRatioTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6"
+                    android:layout_weight="7"
                     android:text="@string/sets_won_to_lost"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="12sp" />
@@ -165,11 +180,11 @@
                     android:id="@+id/setRatio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:text="@string/one"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="center"
                     android:textColor="@color/colorTextBlack"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </TableRow>
 
@@ -193,11 +208,11 @@
                     android:id="@+id/gamesRatio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="4"
                     android:text="@string/one"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="center"
                     android:textColor="@color/colorTextBlack"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:textStyle="bold" />
             </TableRow>
 
