@@ -34,6 +34,15 @@ class AddMatch : AppCompatActivity() {
         // FIRE UP DATABASE
         dbHandler = DBHandler(this, null, null, 1)
 
+        // POSSIBILITY OF EDIT
+        val matchId = intent.getIntExtra("MATCH_ID", -1)
+        val matchPosition = intent.getIntExtra("MATCH_POSITION", 0) +1
+
+        if (matchId != -1) {
+            val match: Match = dbHandler.getMatch(this, matchId)
+            populateView(match, matchPosition)
+        }
+
         // SCORING
         // MATCH SCORING BTNS
         plusBtnYou.setOnClickListener { scoreMatchPlus(myScore) }
@@ -95,7 +104,19 @@ class AddMatch : AppCompatActivity() {
 
         // SAVE AND CANCEL BUTTONS
         saveBtn.setOnClickListener {
-            saveGameFun()
+
+            if(matchId < 0) {
+                saveGameFun()
+                toast("Match saved")
+            }
+
+            if(matchId >= 0) {
+                val match: Match = dbHandler.getMatch(this, matchId)
+                val editedMatch = editedMatch()
+                toast("Match edited")
+                dbHandler.updateMatch(this,match,editedMatch)
+            }
+
             val intent = Intent(this, MatchHistory::class.java)
             clearEdits()
             startActivity(intent)
@@ -389,6 +410,64 @@ class AddMatch : AppCompatActivity() {
         }
     }
 
+    // POPULATE ON EDIT MATCH
+    private fun populateView(match: Match, position: Int) {
+        // CHANGE ADD MATCH TO EDIT MATCH
+        activityTitle.text = getString(R.string.edit_match)
+        saveBtn.text = getString(R.string.save_edit)
+
+        // POPULATE MAIN INFO
+        opponentsName.setText(match.opponentName)
+        courtName.setText(match.courtName)
+        date.text = match.date
+        myScore.text = match.myScore.toString()
+        oppScore.text = match.opponentScore.toString()
+
+        // POPULATE SET SCORES
+        if (match.firstSetMyScore + match.firstSetOpponentScore > 0) {
+            scoreYouSet1.text = match.firstSetMyScore.toString()
+            scoreOppSet1.text = match.firstSetOpponentScore.toString()
+        }
+
+        if (match.secondSetMyScore + match.secondSetOpponentScore > 0) {
+            scoreYouSet2.text = match.secondSetMyScore.toString()
+            scoreOppSet2.text = match.secondSetOpponentScore.toString()
+        }
+
+        if (match.thirdSetMyScore + match.thirdSetOpponentScore > 0) {
+            scoreYouSet3.text = match.thirdSetMyScore.toString()
+            scoreOppSet3.text = match.thirdSetOpponentScore.toString()
+        }
+
+        if (match.fourthSetMyScore + match.fourthSetOpponentScore > 0) {
+            scoreYouSet4.text = match.fourthSetMyScore.toString()
+            scoreOppSet4.text = match.fourthSetOpponentScore.toString()
+        }
+
+        if (match.fifthSetMyScore + match.fifthSetOpponentScore > 0) {
+            scoreYouSet5.text = match.fifthSetMyScore.toString()
+            scoreOppSet5.text = match.fifthSetOpponentScore.toString()
+        }
+
+        // WRITE NOT RECORDED WHEN NECESSARY
+        if (courtName.length() == 0) {courtName.hint = getString(R.string.not_recorded)}
+        if (scoreYouSet1.text.isEmpty() && scoreOppSet1.text.isEmpty()) {
+            scoreYouSet1.hint = getString(R.string.not_recorded)
+            scoreOppSet1.hint = getString(R.string.not_recorded)}
+        if (scoreYouSet2.text.isEmpty() && scoreOppSet2.text.isEmpty()) {
+            scoreYouSet2.hint = getString(R.string.not_recorded)
+            scoreOppSet2.hint = getString(R.string.not_recorded) }
+        if (scoreYouSet3.text.isEmpty() && scoreOppSet3.text.isEmpty()) {
+            scoreYouSet3.hint = getString(R.string.not_recorded)
+            scoreOppSet3.hint = getString(R.string.not_recorded) }
+        if (scoreYouSet4.text.isEmpty() && scoreOppSet4.text.isEmpty()) {
+            scoreYouSet4.hint = getString(R.string.not_recorded)
+            scoreOppSet4.hint = getString(R.string.not_recorded) }
+        if (scoreYouSet5.text.isEmpty() && scoreOppSet5.text.isEmpty()) {
+            scoreYouSet5.hint = getString(R.string.not_recorded)
+            scoreOppSet5.hint = getString(R.string.not_recorded) }
+    }
+
     // SAVE GAME FUNC
     private fun saveGameFun() {
         val match = Match()
@@ -478,9 +557,102 @@ class AddMatch : AppCompatActivity() {
                 match.tenthSetOpponentScore = scoreOppSet10.text.toString().toInt()
             }
 
-            // ADD MATCH CLASS TO DB, CLEAR EDITS ON FORM AND GO TO MATCH HISTORY ACTIVITY
+            // ADD MATCH CLASS TO DB OR EDIT DB ENTRY
             dbHandler.addMatch(this, match)
+
         }
+    }
+
+    private fun editedMatch() : Match {
+        val editMatch = Match()
+
+        when {
+            // CHECK IF MAIN VARS ARE EMPTY - OPPONENT NAME, DATE AND SCORE
+            opponentsName.text.isEmpty() -> {
+                toast("Enter opponent's name")
+                opponentsName.requestFocus()
+            }
+
+            date.text.isEmpty() -> {
+                toast("Select a date")
+                date.requestFocus()
+            }
+
+            myScore.text.toString().toInt() == 0 && oppScore.text.toString().toInt() == 0  -> {
+                toast("Enter match score or enter set scores")
+                date.requestFocus()
+            }
+        }
+
+        // IF THE MAIN VARS ARE FILLED, FINISH THE ACTIVITY AND SAVE THE DATA TO THE MATCH CLASS
+        if (opponentsName.text.isNotEmpty() && date.text.isNotEmpty() && myScore.text.isNotEmpty() && oppScore.text.isNotEmpty()) {
+
+            // IF COURT NAME NOT FILLED THEN PUT NO VALUE ON IT
+            if (courtName.text.isEmpty()) {
+                editMatch.courtName = ""
+            } else {
+                editMatch.courtName = courtName.text.toString()
+            }
+
+            // SET VALUES TO MATCH CLASS
+            editMatch.opponentName = opponentsName.text.toString()
+            editMatch.date = date.text.toString()
+            editMatch.myScore = myScore.text.toString().toInt()
+            editMatch.opponentScore = oppScore.text.toString().toInt()
+
+            // ONLY STORE SCORES THAT WERE RECORDED ON THE FORM
+            if (scoreYouSet1.text.toString().toInt() != 0 && scoreOppSet1.text.toString().toInt() != 0) {
+                editMatch.firstSetMyScore = scoreYouSet1.text.toString().toInt()
+                editMatch.firstSetOpponentScore = scoreOppSet1.text.toString().toInt()
+            }
+
+            if (scoreYouSet2.text.toString().toInt() != 0 && scoreOppSet2.text.toString().toInt() != 0) {
+                editMatch.secondSetMyScore = scoreYouSet2.text.toString().toInt()
+                editMatch.secondSetOpponentScore = scoreOppSet2.text.toString().toInt()
+            }
+
+            if (scoreYouSet3.text.toString().toInt() != 0 && scoreOppSet3.text.toString().toInt() != 0) {
+                editMatch.thirdSetMyScore = scoreYouSet3.text.toString().toInt()
+                editMatch.thirdSetOpponentScore = scoreOppSet3.text.toString().toInt()
+            }
+
+            if (scoreYouSet4.text.toString().toInt() != 0 && scoreOppSet4.text.toString().toInt() != 0) {
+                editMatch.fourthSetMyScore = scoreYouSet4.text.toString().toInt()
+                editMatch.fourthSetOpponentScore = scoreOppSet4.text.toString().toInt()
+            }
+
+            if (scoreYouSet5.text.toString().toInt() != 0 && scoreOppSet5.text.toString().toInt() != 0) {
+                editMatch.fifthSetMyScore = scoreYouSet5.text.toString().toInt()
+                editMatch.fifthSetOpponentScore = scoreOppSet5.text.toString().toInt()
+            }
+
+            if (scoreYouSet6.text.toString().toInt() != 0 && scoreOppSet6.text.toString().toInt() != 0) {
+                editMatch.sixthSetMyScore = scoreYouSet6.text.toString().toInt()
+                editMatch.sixthSetOpponentScore = scoreOppSet6.text.toString().toInt()
+            }
+
+            if (scoreYouSet7.text.toString().toInt() != 0 && scoreOppSet7.text.toString().toInt() != 0) {
+                editMatch.seventhSetMyScore = scoreYouSet7.text.toString().toInt()
+                editMatch.seventhSetOpponentScore = scoreOppSet7.text.toString().toInt()
+            }
+
+            if (scoreYouSet8.text.toString().toInt() != 0 && scoreOppSet8.text.toString().toInt() != 0) {
+                editMatch.eighthSetMyScore = scoreYouSet8.text.toString().toInt()
+                editMatch.eighthSetOpponentScore = scoreOppSet8.text.toString().toInt()
+            }
+
+            if (scoreYouSet9.text.toString().toInt() != 0 && scoreOppSet9.text.toString().toInt() != 0) {
+                editMatch.ninthSetMyScore = scoreYouSet9.text.toString().toInt()
+                editMatch.ninthSetOpponentScore = scoreOppSet9.text.toString().toInt()
+            }
+
+            if (scoreYouSet10.text.toString().toInt() != 0 && scoreOppSet10.text.toString().toInt() != 0) {
+                editMatch.tenthSetMyScore = scoreYouSet10.text.toString().toInt()
+                editMatch.tenthSetOpponentScore = scoreOppSet10.text.toString().toInt()
+            }
+        }
+
+        return editMatch
     }
 
     // CLEAR SCORE AND TEXT FUNCTIONS
@@ -514,6 +686,8 @@ class AddMatch : AppCompatActivity() {
     }
 
     private fun clearEdits() {
+        activityTitle.text = getString(R.string.add_match)
+        saveBtn.text = getString(R.string.save_match)
         opponentsName.text.clear()
         courtName.text.clear()
         date.text = getString(R.string.date)

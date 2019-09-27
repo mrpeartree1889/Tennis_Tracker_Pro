@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import android.widget.Toast
 import com.example.tennistrackerpro.activities.Models.Match
 import java.lang.Exception
@@ -186,6 +187,82 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
         } catch (e: Exception) {
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }
+        db.close()
+    }
+
+    fun getMatch(mCtx: Context, matchIndex: Int) : Match {
+        val db = this.writableDatabase
+        val selection = "SELECT * FROM $MATCHES_TABLE_NAME WHERE $COLUMN_MATCHID = $matchIndex"
+
+        val cursor = db.rawQuery(selection, null)
+        cursor.moveToFirst()
+
+        var match = Match()
+        match.MatchID = cursor.getInt(cursor.getColumnIndex(COLUMN_MATCHID))
+        match.opponentName = cursor.getString(cursor.getColumnIndex(COLUMN_OPPONENT_NAME))
+        match.courtName = cursor.getString(cursor.getColumnIndex(COLUMN_COURT_NAME))
+        match.date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
+        match.myScore = cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE))
+        match.opponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_OPPONENT_SCORE))
+        match.firstSetMyScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_MY_SCORE))
+        match.firstSetOpponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_OPPONENT_SCORE))
+        match.secondSetMyScore = cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_MY_SCORE))
+        match.secondSetOpponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_OPPONENT_SCORE))
+        match.thirdSetMyScore = cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_MY_SCORE))
+        match.thirdSetOpponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_OPPONENT_SCORE))
+        match.fourthSetMyScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_MY_SCORE))
+        match.fourthSetOpponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_OPPONENT_SCORE))
+        match.fifthSetMyScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_MY_SCORE))
+        match.fifthSetOpponentScore = cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_OPPONENT_SCORE))
+
+        // ADD FUNCTIONALITY FOR SETS 6, 7, 8, 9 AND 10
+
+        Log.d("CheckSets", "from the db query the set scores are ${match.firstSetMyScore} ${match.firstSetOpponentScore} ||| ${match.secondSetMyScore} ${match.secondSetOpponentScore} ||| ${match.thirdSetMyScore} ${match.fourthSetOpponentScore} for the first 3 sets")
+        cursor.close()
+        db.close()
+        return match
+    }
+
+    fun updateMatch(mCtx: Context, oldMatch:Match,newMatch:Match) {
+        val db = this.writableDatabase
+        val opponentName = newMatch.opponentName
+        val courtName = newMatch.courtName
+        val matchDate = newMatch.date
+        val myScore = newMatch.myScore
+        val opponentScore = newMatch.opponentScore
+        val firstSetMyScore = newMatch.firstSetMyScore
+        val firstSetOpponentScore = newMatch.firstSetOpponentScore
+        val secondSetMyScore = newMatch.secondSetMyScore
+        val secondSetOpponentScore = newMatch.secondSetOpponentScore
+        val thirdSetMyScore = newMatch.thirdSetMyScore
+        val thirdSetOpponentScore = newMatch.thirdSetOpponentScore
+        val fourthSetMyScore = newMatch.fourthSetMyScore
+        val fourthSetOpponentScore = newMatch.fourthSetOpponentScore
+        val fifthSetMyScore = newMatch.fifthSetMyScore
+        val fifthSetOpponentScore = newMatch.fifthSetOpponentScore
+
+        val contentValues = ContentValues().apply {
+            put(COLUMN_OPPONENT_NAME, opponentName)
+            put(COLUMN_COURT_NAME, courtName)
+            put(COLUMN_DATE, matchDate)
+            put(COLUMN_MY_SCORE, myScore)
+            put(COLUMN_OPPONENT_SCORE, opponentScore)
+            put(COLUMN_FIRST_SET_MY_SCORE, firstSetMyScore)
+            put(COLUMN_FIRST_SET_OPPONENT_SCORE, firstSetOpponentScore)
+            put(COLUMN_SECOND_SET_MY_SCORE, secondSetMyScore)
+            put(COLUMN_SECOND_SET_OPPONENT_SCORE, secondSetOpponentScore)
+            put(COLUMN_THIRD_SET_MY_SCORE, thirdSetMyScore)
+            put(COLUMN_THIRD_SET_OPPONENT_SCORE, thirdSetOpponentScore)
+            put(COLUMN_FOURTH_SET_MY_SCORE, fourthSetMyScore)
+            put(COLUMN_FOURTH_SET_OPPONENT_SCORE, fourthSetOpponentScore)
+            put(COLUMN_FIFTH_SET_MY_SCORE, fifthSetMyScore)
+            put(COLUMN_FIFTH_SET_OPPONENT_SCORE, fifthSetOpponentScore)
+        }
+
+        val selection = "$COLUMN_MATCHID LIKE ?"
+        val selectionArgs = arrayOf(oldMatch.MatchID.toString())
+
+        val count = db.update(MATCHES_TABLE_NAME, contentValues, selection, selectionArgs)
         db.close()
     }
 
