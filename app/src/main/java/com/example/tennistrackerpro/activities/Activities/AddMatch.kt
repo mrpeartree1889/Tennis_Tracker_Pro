@@ -434,48 +434,48 @@ class AddMatch : AppCompatActivity() {
             }
 
             if (scoreYouSet2.text.toString().toInt() != 0 && scoreOppSet2.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet2.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet2.text.toString().toInt()
+                match.secondSetMyScore = scoreYouSet2.text.toString().toInt()
+                match.secondSetOpponentScore = scoreOppSet2.text.toString().toInt()
             }
 
             if (scoreYouSet3.text.toString().toInt() != 0 && scoreOppSet3.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet3.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet3.text.toString().toInt()
+                match.thirdSetMyScore = scoreYouSet3.text.toString().toInt()
+                match.thirdSetOpponentScore = scoreOppSet3.text.toString().toInt()
             }
 
             if (scoreYouSet4.text.toString().toInt() != 0 && scoreOppSet4.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet4.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet4.text.toString().toInt()
+                match.fourthSetMyScore = scoreYouSet4.text.toString().toInt()
+                match.fourthSetOpponentScore = scoreOppSet4.text.toString().toInt()
             }
 
             if (scoreYouSet5.text.toString().toInt() != 0 && scoreOppSet5.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet5.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet5.text.toString().toInt()
+                match.fifthSetMyScore = scoreYouSet5.text.toString().toInt()
+                match.fifthSetOpponentScore = scoreOppSet5.text.toString().toInt()
             }
 
             if (scoreYouSet6.text.toString().toInt() != 0 && scoreOppSet6.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet6.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet6.text.toString().toInt()
+                match.sixthSetMyScore = scoreYouSet6.text.toString().toInt()
+                match.sixthSetOpponentScore = scoreOppSet6.text.toString().toInt()
             }
 
             if (scoreYouSet7.text.toString().toInt() != 0 && scoreOppSet7.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet7.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet7.text.toString().toInt()
+                match.seventhSetMyScore = scoreYouSet7.text.toString().toInt()
+                match.seventhSetOpponentScore = scoreOppSet7.text.toString().toInt()
             }
 
             if (scoreYouSet8.text.toString().toInt() != 0 && scoreOppSet8.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet8.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet8.text.toString().toInt()
+                match.eighthSetMyScore = scoreYouSet8.text.toString().toInt()
+                match.eighthSetOpponentScore = scoreOppSet8.text.toString().toInt()
             }
 
             if (scoreYouSet9.text.toString().toInt() != 0 && scoreOppSet9.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet9.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet9.text.toString().toInt()
+                match.ninthSetMyScore = scoreYouSet9.text.toString().toInt()
+                match.ninthSetOpponentScore = scoreOppSet9.text.toString().toInt()
             }
 
             if (scoreYouSet10.text.toString().toInt() != 0 && scoreOppSet10.text.toString().toInt() != 0) {
-                match.firstSetMyScore = scoreYouSet10.text.toString().toInt()
-                match.firstSetOpponentScore = scoreOppSet10.text.toString().toInt()
+                match.tenthSetMyScore = scoreYouSet10.text.toString().toInt()
+                match.tenthSetOpponentScore = scoreOppSet10.text.toString().toInt()
             }
 
             // ADD MATCH CLASS TO DB, CLEAR EDITS ON FORM AND GO TO MATCH HISTORY ACTIVITY

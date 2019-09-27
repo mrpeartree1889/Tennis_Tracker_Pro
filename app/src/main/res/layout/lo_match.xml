@@ -24,8 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Match #"
+            android:textAlignment="textStart"
             android:textColor="@color/colorTextGrey"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
+            android:textAlignment="textStart"
             android:textColor="@color/colorTextGrey"
-            android:textSize="24sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView22"
             app:layout_constraintStart_toEndOf="@+id/textView22" />
 
@@ -44,11 +46,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="4dp"
             android:text="Opponent's name"
+            android:textAlignment="textStart"
             android:textColor="@color/colorTextBlack"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/myScoreMatchLo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView22" />
@@ -85,7 +86,6 @@
             android:id="@+id/matchDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:text="00/00/00"
             android:textColor="@color/colorTextGrey"
@@ -128,29 +128,22 @@
         android:id="@+id/matchBottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/lo_match_down_bckg"
+        android:paddingVertical="8dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/matchTopLayout">
 
-        <ImageView
-            android:id="@+id/imageView15"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/grey_line" />
-
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:gravity="center"
             android:stretchColumns="*"
             android:weightSum="8"
@@ -198,6 +191,7 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="3"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:weightSum="3">
 
@@ -206,6 +200,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_1"
                     android:textColor="@color/colorTextGrey" />
 
@@ -243,6 +238,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_2"
                     android:textColor="@color/colorTextGrey" />
 
@@ -272,6 +268,7 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="3"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:weightSum="3">
 
@@ -280,6 +277,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_3"
                     android:textColor="@color/colorTextGrey" />
 
@@ -317,6 +315,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_4"
                     android:textColor="@color/colorTextGrey" />
 
@@ -346,6 +345,7 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="3"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:weightSum="3">
 
@@ -354,7 +354,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set #5"
+                    android:paddingStart="2dp"
+                    android:text="@string/set_5"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
@@ -391,7 +392,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set #6"
+                    android:paddingStart="2dp"
+                    android:text="@string/set_6"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
@@ -420,6 +422,7 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="3"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:weightSum="3">
 
@@ -428,7 +431,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Set #7"
+                    android:paddingStart="2dp"
+                    android:text="@string/set_7"
                     android:textColor="@color/colorTextGrey" />
 
                 <TextView
@@ -465,6 +469,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_8"
                     android:textColor="@color/colorTextGrey" />
 
@@ -494,6 +499,7 @@
                 android:layout_height="2dp"
                 android:layout_marginBottom="2dp"
                 android:layout_weight="3"
+                android:background="#FFFFFF"
                 android:gravity="center"
                 android:weightSum="3">
 
@@ -502,6 +508,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_9"
                     android:textColor="@color/colorTextGrey" />
 
@@ -539,6 +546,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingStart="2dp"
                     android:text="@string/set_10"
                     android:textColor="@color/colorTextGrey" />
 
@@ -570,10 +578,10 @@
             android:layout_height="30dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/btn_cancel"
+            android:background="@drawable/history_btn_delete"
             android:paddingHorizontal="5dp"
             android:text="Delete match"
-            android:textColor="@android:color/white"
+            android:textColor="@color/accentColorSec"
             app:layout_constraintBottom_toTopOf="@+id/editMatchBtn"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -581,20 +589,12 @@
             android:id="@+id/editMatchBtn"
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/btn_save"
-            android:backgroundTint="@color/primaryColorLight"
+            android:background="@drawable/history_btn_edit"
             android:text="Edit match"
             android:textColor="@color/primaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/deleteMatchBtn"
             app:layout_constraintStart_toStartOf="@+id/deleteMatchBtn" />
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="20dp"
-            android:layout_height="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/deleteMatchBtn"
-            app:layout_constraintEnd_toEndOf="@+id/deleteMatchBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

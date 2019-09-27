@@ -63,8 +63,9 @@
     <string name="sets_won_to_lost">Sets won to lost</string>
     <string name="games_won_to_lost">Games won to lost</string>
     <string name="ratios">Ratios</string>
-
-
+    <string name="set_5">Set #5</string>
+    <string name="set_6">Set #6</string>
+    <string name="set_7">Set #7</string>
 
 
 </resources>

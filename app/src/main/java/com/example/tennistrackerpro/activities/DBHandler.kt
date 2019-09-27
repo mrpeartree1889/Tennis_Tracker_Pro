@@ -91,11 +91,45 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
             Toast.makeText(mCtx, "No records found", Toast.LENGTH_SHORT).show() else {
             while (cursor.moveToNext()) {
                 val match = Match()
+                // MAIN INFO
                 match.MatchID = cursor.getInt(cursor.getColumnIndex(COLUMN_MATCHID))
                 match.opponentName = cursor.getString(cursor.getColumnIndex(COLUMN_OPPONENT_NAME))
                 match.date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE))
                 match.myScore = cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE))
                 match.opponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_OPPONENT_SCORE)))
+
+                // SET INFO
+                match.firstSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FIRST_SET_MY_SCORE)))
+                match.firstSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FIRST_SET_OPPONENT_SCORE)))
+
+                match.secondSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SECOND_SET_MY_SCORE)))
+                match.secondSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SECOND_SET_OPPONENT_SCORE)))
+
+                match.thirdSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_THIRD_SET_MY_SCORE)))
+                match.thirdSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_THIRD_SET_OPPONENT_SCORE)))
+
+                match.fourthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FOURTH_SET_MY_SCORE)))
+                match.fourthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FOURTH_SET_OPPONENT_SCORE)))
+
+                match.fifthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FIFTH_SET_MY_SCORE)))
+                match.fifthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_FIFTH_SET_OPPONENT_SCORE)))
+
+                match.sixthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SIXTH_SET_MY_SCORE)))
+                match.sixthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SIXTH_SET_OPPONENT_SCORE)))
+
+                match.seventhSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SEVENTH_SET_MY_SCORE)))
+                match.seventhSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_SEVENTH_SET_OPPONENT_SCORE)))
+
+                match.eighthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_EIGHTH_SET_MY_SCORE)))
+                match.eighthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_EIGHTH_SET_OPPONENT_SCORE)))
+
+                match.ninthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_NINTH_SET_MY_SCORE)))
+                match.ninthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_NINTH_SET_OPPONENT_SCORE)))
+
+                match.tenthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_TENTH_SET_MY_SCORE)))
+                match.tenthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_TENTH_SET_OPPONENT_SCORE)))
+
+
                 matches.add(match)
             }
         }
@@ -127,7 +161,21 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
         if (match.fifthSetMyScore + match.fifthSetOpponentScore > 0) {
             values.put(COLUMN_FIFTH_SET_MY_SCORE, match.fifthSetMyScore)
             values.put(COLUMN_FIFTH_SET_OPPONENT_SCORE, match.fifthSetOpponentScore) }
-        // ADD FUNCTIONALITY FOR SETS 6, 7, 8, 9 AND 10
+        if (match.sixthSetMyScore + match.sixthSetOpponentScore > 0) {
+            values.put(COLUMN_SIXTH_SET_MY_SCORE, match.sixthSetMyScore)
+            values.put(COLUMN_SIXTH_SET_OPPONENT_SCORE, match.sixthSetOpponentScore) }
+        if (match.seventhSetMyScore + match.seventhSetOpponentScore > 0) {
+            values.put(COLUMN_SEVENTH_SET_MY_SCORE, match.seventhSetMyScore)
+            values.put(COLUMN_SEVENTH_SET_OPPONENT_SCORE, match.seventhSetOpponentScore) }
+        if (match.eighthSetMyScore + match.eighthSetOpponentScore > 0) {
+            values.put(COLUMN_EIGHTH_SET_MY_SCORE, match.eighthSetMyScore)
+            values.put(COLUMN_EIGHTH_SET_OPPONENT_SCORE, match.eighthSetOpponentScore) }
+        if (match.ninthSetMyScore + match.ninthSetOpponentScore > 0) {
+            values.put(COLUMN_NINTH_SET_MY_SCORE, match.ninthSetMyScore)
+            values.put(COLUMN_NINTH_SET_OPPONENT_SCORE, match.ninthSetOpponentScore) }
+        if (match.tenthSetMyScore + match.tenthSetOpponentScore > 0) {
+            values.put(COLUMN_TENTH_SET_MY_SCORE, match.tenthSetMyScore)
+            values.put(COLUMN_TENTH_SET_OPPONENT_SCORE, match.tenthSetOpponentScore) }
 
         val db = this.writableDatabase
 
@@ -139,6 +187,14 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
             Toast.makeText(mCtx, e.message, Toast.LENGTH_SHORT).show()
         }
         db.close()
+    }
+
+    fun deleteMatch(mCtx: Context, match: Match) {
+        val db = this.writableDatabase
+        val selection = "$COLUMN_MATCHID LIKE ?"
+        val selectionArgs  = arrayOf(match.MatchID.toString())
+
+        val deletedRows = db.delete(MATCHES_TABLE_NAME, selection, selectionArgs)
     }
 
 }

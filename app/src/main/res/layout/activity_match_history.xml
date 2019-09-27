@@ -124,24 +124,23 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:baselineAligned="false"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:baselineAligned="false">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/statisticsLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/btn_yellow_landing"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="4dp">
+            android:paddingVertical="8dp">
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -163,14 +162,14 @@
 
         <LinearLayout
             android:id="@+id/newMatchLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:background="@drawable/btn_yellow_landing"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="4dp">
+            android:paddingVertical="8dp">
 
             <ImageView
                 android:id="@+id/imageView11"
