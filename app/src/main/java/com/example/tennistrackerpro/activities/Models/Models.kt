@@ -28,3 +28,12 @@ class Match{
     var tenthSetMyScore : Int = 0
     var tenthSetOpponentScore : Int = 0
 }
+
+class Statistics{
+    var matchesWon : Int = 0
+    var matchesLost : Int = 0
+    var setsWon : Int = 0
+    var setsLost : Int = 0
+    var gamesWon : Int = 0
+    var gamesLost : Int = 0
+}

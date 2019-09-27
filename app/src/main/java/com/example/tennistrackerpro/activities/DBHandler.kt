@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
 import com.example.tennistrackerpro.activities.Models.Match
+import com.example.tennistrackerpro.activities.Models.Statistics
+import org.jetbrains.anko.toast
 import java.lang.Exception
 
 class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int):
@@ -274,4 +276,72 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
         val deletedRows = db.delete(MATCHES_TABLE_NAME, selection, selectionArgs)
     }
 
+    fun mainStatistics(mCtx: Context) : Statistics {
+        val db = this.readableDatabase
+        val mainStatistics = Statistics()
+        val qry = "SELECT * FROM $MATCHES_TABLE_NAME ORDER BY $COLUMN_DATE ASC"
+        val cursor = db.rawQuery(qry, null)
+
+        // LOCAL VARS
+        var matchesWon : Int = 0
+        var matchesLost : Int = 0
+        var setsWon : Int = 0
+        var setsLost : Int = 0
+        var gamesWon : Int = 0
+        var gamesLost : Int = 0
+
+        if (cursor.count == 0)
+            mCtx.toast("No records found") else {
+            while (cursor.moveToNext()) {
+                // MATCH WINS VS LOSS COUNT
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_OPPONENT_SCORE)))
+                    matchesWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_OPPONENT_SCORE)))
+                    matchesLost += 1
+
+                // SETS WIN VS LOST COUNT
+                // set 1
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_OPPONENT_SCORE)))
+                    setsWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_OPPONENT_SCORE)))
+                    setsLost += 1
+                // set 2
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_OPPONENT_SCORE)))
+                    setsWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_OPPONENT_SCORE)))
+                    setsLost += 1
+                // set 3
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_OPPONENT_SCORE)))
+                    setsWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_OPPONENT_SCORE)))
+                    setsLost += 1
+                // set 4
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_OPPONENT_SCORE)))
+                    setsWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_OPPONENT_SCORE)))
+                    setsLost += 1
+                // set 5
+                if (cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_MY_SCORE)) > cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_OPPONENT_SCORE)))
+                    setsWon += 1 else if (cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_MY_SCORE)) < cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_OPPONENT_SCORE)))
+                    setsLost += 1
+
+                // GAMES WON VS LOST COUNT
+                gamesWon += (cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_MY_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_MY_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_MY_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_MY_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_MY_SCORE)))
+
+                gamesLost += (cursor.getInt(cursor.getColumnIndex(COLUMN_FIRST_SET_OPPONENT_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_SECOND_SET_OPPONENT_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_THIRD_SET_OPPONENT_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_FOURTH_SET_OPPONENT_SCORE)) +
+                            cursor.getInt(cursor.getColumnIndex(COLUMN_FIFTH_SET_OPPONENT_SCORE)))
+            }
+        }
+
+        mainStatistics.matchesWon = matchesWon
+        mainStatistics.matchesLost = matchesLost
+        mainStatistics.setsWon = setsWon
+        mainStatistics.setsLost = setsLost
+        mainStatistics.gamesWon = gamesWon
+        mainStatistics.gamesLost = gamesLost
+
+        return mainStatistics
+    }
 }

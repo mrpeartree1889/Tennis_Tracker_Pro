@@ -128,7 +128,7 @@
                     android:id="@+id/matchRatioTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
+                    android:layout_weight="6"
                     android:text="@string/matches_won_to_lost"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="12sp" />
@@ -156,7 +156,7 @@
                     android:id="@+id/setRatioTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
+                    android:layout_weight="6"
                     android:text="@string/sets_won_to_lost"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="12sp" />
@@ -222,9 +222,10 @@
             android:id="@+id/gamesPlayedTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_top_radius"
+            android:background="@drawable/statistics_top_green_bckg"
             android:text="@string/total_games_played"
             android:textAlignment="center"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -233,7 +234,7 @@
             android:id="@+id/totalGamesPlayed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_bottom_radius"
+            android:background="@drawable/statistics_bottom_green_bckg"
             android:text="@string/zero"
             android:textAlignment="center"
             android:textColor="@color/colorTextBlack"
@@ -362,9 +363,10 @@
             android:id="@+id/totalSetsPlayedTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_top_radius"
-            android:text="@string/total_matches_played"
+            android:background="@drawable/statistics_top_green_bckg"
+            android:text="Total sets played"
             android:textAlignment="center"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -373,7 +375,7 @@
             android:id="@+id/totalSetsPlayed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_bottom_radius"
+            android:background="@drawable/statistics_bottom_green_bckg"
             android:text="@string/zero"
             android:textAlignment="center"
             android:textColor="@color/colorTextBlack"
@@ -500,18 +502,19 @@
             android:id="@+id/textView14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_top_radius"
+            android:background="@drawable/statistics_top_green_bckg"
             android:text="@string/total_matches_played"
             android:textAlignment="center"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/matchesPlayedTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/green_bckg_bottom_radius"
+            android:background="@drawable/statistics_bottom_green_bckg"
             android:text="@string/zero"
             android:textAlignment="center"
             android:textColor="@color/colorTextBlack"
@@ -531,7 +534,7 @@
             android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16">
+            app:layout_constraintTop_toBottomOf="@+id/matchesPlayedTxt">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -550,7 +553,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/matchesWonTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/zero"
@@ -568,7 +571,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/matchesLostTxt"
+                    android:id="@+id/matchesLostTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/matches_lost"
@@ -576,7 +579,7 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/matchesLost"
+                    android:id="@+id/matchesLostTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/zero"
