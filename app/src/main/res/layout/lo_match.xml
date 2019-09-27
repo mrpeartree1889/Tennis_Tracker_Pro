@@ -146,6 +146,7 @@
             android:layout_marginBottom="8dp"
             android:gravity="center"
             android:stretchColumns="*"
+            android:visibility="visible"
             android:weightSum="8"
             app:layout_constraintBottom_toBottomOf="@+id/editMatchBtn"
             app:layout_constraintEnd_toStartOf="@+id/deleteMatchBtn"

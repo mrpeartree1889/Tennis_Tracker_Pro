@@ -6,16 +6,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tennistrackerpro.R
 import com.example.tennistrackerpro.activities.Activities.AddMatch
 import com.example.tennistrackerpro.activities.Activities.MatchHistory
 import com.example.tennistrackerpro.activities.DBHandler
 import com.example.tennistrackerpro.activities.Models.Match
+import kotlinx.android.synthetic.main.activity_add_match.view.*
 import kotlinx.android.synthetic.main.lo_match.view.*
-import org.jetbrains.anko.alert
-import org.jetbrains.anko.backgroundColor
-import org.jetbrains.anko.backgroundColorResource
+import kotlinx.android.synthetic.main.lo_match.view.courtName
+import org.jetbrains.anko.*
 import kotlin.collections.ArrayList
 
 class MatchAdapter(val mCtx: Context, val matches : ArrayList<Match>, val activity: MatchHistory) : RecyclerView.Adapter<MatchAdapter.ViewHolder>() {
@@ -77,9 +79,78 @@ class MatchAdapter(val mCtx: Context, val matches : ArrayList<Match>, val activi
             }
         }
 
+        // ON CLICK FOR DOWN ARROW
+        holder.itemView.downButton.setOnClickListener() {
+            populateSetScore(match, holder)
+            holder.itemView.matchBottomLayout.visibility = View.VISIBLE
+            holder.itemView.downButton.visibility = View.GONE
+            holder.itemView.upButton.visibility = View.VISIBLE
+        }
+
+        // ON CLICK FOR UP ARROW
+        holder.itemView.upButton.setOnClickListener() {
+            holder.itemView.matchBottomLayout.visibility = View.GONE
+            holder.itemView.downButton.visibility = View.VISIBLE
+            holder.itemView.upButton.visibility = View.GONE
+        }
+
+        // ON CLICK FOR EDIT BUTTON
+        holder.itemView.editMatchBtn.setOnClickListener() {
+            val matchIndex: Int = match.MatchID
+            val intent = Intent(mCtx, AddMatch::class.java)
+            intent.putExtra("MATCH_ID", matchIndex)
+            intent.putExtra("MATCH_POSITION", position)
+
+            activity.startActivity(intent)
+        }
+
+        // ON CLICK DELETE BUTTON
+        holder.itemView.deleteMatchBtn.setOnClickListener() {
+            mCtx.alert {
+                title = "Are you sure you want to delete this match?"
+                message = "If you delete this match, it will be permanently erased and you won't be able to retrieve it."
+                positiveButton("Proceed") {
+                    matches.removeAt(position)
+                    notifyItemRemoved(position)
+                    notifyItemRangeRemoved(position, matches.size)
+                    dbHandler.deleteMatch(mCtx, match)
+                }
+                negativeButton ("Cancel") {}
+            }.show()
+        }
+    }
+
+    private fun configureLayoutBottom(holder: ViewHolder) {
+        val editBtn = holder.itemView.editMatchBtn
+        val deleteBtn = holder.itemView.deleteMatchBtn
+        deleteBtn.id = R.id.deleteMatchBtn
+        editBtn.id = R.id.editMatchBtn
+
+        val myLayout = holder.itemView.matchBottomLayout
+        val set = ConstraintSet()
+
+        set.constrainWidth(deleteBtn.id, 0)
+        set.constrainWidth(editBtn.id, 0)
+        set.constrainHeight(deleteBtn.id, 100)
+        set.constrainHeight(editBtn.id, 100)
+
+        set.connect(editBtn.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        set.connect(editBtn.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 8)
+        set.connect(editBtn.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 0)
+        set.connect(editBtn.id, ConstraintSet.END, deleteBtn.id, ConstraintSet.START, 8)
+
+        set.connect(deleteBtn.id, ConstraintSet.TOP, ConstraintSet.PARENT_ID, ConstraintSet.TOP, 0)
+        set.connect(deleteBtn.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 8)
+
+        set.applyTo(myLayout)
+    }
+
+    private fun populateSetScore(match: Match, holder: ViewHolder) {
         // SETS AND POPULATE
         if(match.firstSetMyScore == 0 && match.firstSetOpponentScore == 0){
+            configureLayoutBottom(holder)
             holder.itemView.tableLayout.visibility = View.GONE
+            mCtx.toast("No sets were recorded for this match")
         } else if (match.firstSetMyScore != 0 || match.firstSetOpponentScore != 0) {
             holder.itemView.myScoreSet1.text = match.firstSetMyScore.toString()
             holder.itemView.oppScoreSet1.text = match.firstSetOpponentScore.toString()
@@ -206,48 +277,6 @@ class MatchAdapter(val mCtx: Context, val matches : ArrayList<Match>, val activi
             } else if (match.tenthSetMyScore < match.tenthSetOpponentScore) {
                 holder.itemView.oppScoreSet10.setBackgroundResource(R.color.primaryColorLight)
             }
-        }
-
-
-
-
-        // ON CLICK FOR DOWN ARROW
-        holder.itemView.downButton.setOnClickListener() {
-            holder.itemView.matchBottomLayout.visibility = View.VISIBLE
-            holder.itemView.downButton.visibility = View.GONE
-            holder.itemView.upButton.visibility = View.VISIBLE
-        }
-
-        // ON CLICK FOR UP ARROW
-        holder.itemView.upButton.setOnClickListener() {
-            holder.itemView.matchBottomLayout.visibility = View.GONE
-            holder.itemView.downButton.visibility = View.VISIBLE
-            holder.itemView.upButton.visibility = View.GONE
-        }
-
-        // ON CLICK FOR EDIT BUTTON
-        holder.itemView.editMatchBtn.setOnClickListener() {
-            val matchIndex: Int = match.MatchID
-            val intent = Intent(mCtx, AddMatch::class.java)
-            intent.putExtra("MATCH_ID", matchIndex)
-            intent.putExtra("MATCH_POSITION", position)
-
-            activity.startActivity(intent)
-        }
-
-        // ON CLICK DELETE BUTTON
-        holder.itemView.deleteMatchBtn.setOnClickListener() {
-            mCtx.alert {
-                title = "Are you sure you want to delete this match?"
-                message = "If you delete this match, it will be permanently erased and you won't be able to retrieve it."
-                positiveButton("Proceed") {
-                    matches.removeAt(position)
-                    notifyItemRemoved(position)
-                    notifyItemRangeRemoved(position, matches.size)
-                    dbHandler.deleteMatch(mCtx, match)
-                }
-                negativeButton ("Cancel") {}
-            }.show()
         }
     }
 
