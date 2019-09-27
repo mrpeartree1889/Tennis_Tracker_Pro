@@ -241,6 +241,7 @@ class MatchAdapter(val mCtx: Context, val matches : ArrayList<Match>, val activi
                 title = "Are you sure you want to delete this match?"
                 message = "If you delete this match, it will be permanently erased and you won't be able to retrieve it."
                 positiveButton("Proceed") {
+                    matches.removeAt(position)
                     notifyItemRemoved(position)
                     notifyItemRangeRemoved(position, matches.size)
                     dbHandler.deleteMatch(mCtx, match)
