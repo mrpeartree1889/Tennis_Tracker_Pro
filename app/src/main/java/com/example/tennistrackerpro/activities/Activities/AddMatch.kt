@@ -35,7 +35,9 @@ class AddMatch : AppCompatActivity() {
         dbHandler = DBHandler(this, null, null, 1)
 
         // POSSIBILITY OF EDIT
-        val matchId = intent.getIntExtra("MATCH_ID", -1)
+        var matchId = -1
+        val matchIdRetrieved = intent.getIntExtra("MATCH_ID", -1)
+        if (matchIdRetrieved >= 0) {matchId = matchIdRetrieved}
         val matchPosition = intent.getIntExtra("MATCH_POSITION", 0) +1
 
         if (matchId != -1) {
@@ -119,12 +121,14 @@ class AddMatch : AppCompatActivity() {
 
             val intent = Intent(this, MatchHistory::class.java)
             clearEdits()
+            matchId = -1
             startActivity(intent)
         }
 
         cancelBtn.setOnClickListener {
             val intent = Intent(this, MatchHistory::class.java)
             clearEdits()
+            matchId = -1
             startActivity(intent)
         }
 

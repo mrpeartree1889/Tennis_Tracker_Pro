@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.tennistrackerpro.activities.Models.Match
 import com.example.tennistrackerpro.activities.Models.Statistics
+import com.example.tennistrackerpro.activities.Models.scoreOpponents
 import org.jetbrains.anko.toast
 import java.lang.Exception
 
@@ -141,6 +142,45 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
         return matches
     }
 
+    fun getScoresOpp(mCtx: Context) : ArrayList<scoreOpponents> {
+        val qry = "SELECT $COLUMN_OPPONENT_NAME , $COLUMN_MY_SCORE , $COLUMN_OPPONENT_SCORE FROM $MATCHES_TABLE_NAME"
+        val db = this.readableDatabase
+        val oppNameCursor = db.query(true, MATCHES_TABLE_NAME, arrayOf(COLUMN_OPPONENT_NAME), null, null, COLUMN_OPPONENT_NAME, null, COLUMN_OPPONENT_NAME, null)
+        val cursor = db.rawQuery(qry, null)
+        val scoreOpponents = ArrayList<scoreOpponents>()
+
+        if (cursor.count == 0 || oppNameCursor.count == 0)
+            Toast.makeText(mCtx, "No records found", Toast.LENGTH_SHORT).show() else {
+            while (oppNameCursor.moveToNext()) {
+                val oppScore = scoreOpponents()
+                oppScore.opponentName = oppNameCursor.getString(oppNameCursor.getColumnIndex(COLUMN_OPPONENT_NAME))
+                var matchesWon = 0
+                var matchesLost = 0
+                while (cursor.moveToNext()) {
+                    if (oppScore.opponentName == cursor.getString(cursor.getColumnIndex(COLUMN_OPPONENT_NAME))) {
+                        var mySet = cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE))
+                        var oppSet = cursor.getInt(cursor.getColumnIndex(COLUMN_OPPONENT_SCORE))
+                        if (mySet > oppSet) {matchesWon += 1}
+                        if (oppSet > mySet) {matchesLost += 1}
+                        Log.d("errorFinding","Score at $cursor is $matchesWon vs $matchesLost")
+                    }
+                }
+
+                oppScore.matchesWon = matchesWon
+                oppScore.matchesLost = matchesLost
+                cursor.moveToFirst()
+
+                scoreOpponents.add(oppScore)
+            }
+
+        }
+
+        oppNameCursor.close()
+        cursor.close()
+        db.close()
+        return scoreOpponents
+    }
+
     fun addMatch(mCtx: Context, match: Match) {
         val values = ContentValues()
         values.put(COLUMN_OPPONENT_NAME, match.opponentName)
@@ -219,7 +259,6 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
 
         // ADD FUNCTIONALITY FOR SETS 6, 7, 8, 9 AND 10
 
-        Log.d("CheckSets", "from the db query the set scores are ${match.firstSetMyScore} ${match.firstSetOpponentScore} ||| ${match.secondSetMyScore} ${match.secondSetOpponentScore} ||| ${match.thirdSetMyScore} ${match.fourthSetOpponentScore} for the first 3 sets")
         cursor.close()
         db.close()
         return match

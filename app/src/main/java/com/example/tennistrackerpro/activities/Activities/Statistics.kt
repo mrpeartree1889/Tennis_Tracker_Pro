@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tennistrackerpro.R
+import com.example.tennistrackerpro.activities.Adapters.OppAdapter
 import com.example.tennistrackerpro.activities.DBHandler
 import com.example.tennistrackerpro.activities.Models.Statistics
 import kotlinx.android.synthetic.main.activity_statistics.*
@@ -27,6 +30,7 @@ class Statistics : AppCompatActivity() {
 
         val mainStatistics = dbHandler.mainStatistics(this)
         populateStatistics((mainStatistics))
+        viewScoreOpp()
 
         matchHistoryLayout.setOnClickListener() {
             val intent = Intent(this, MatchHistory::class.java)
@@ -90,6 +94,14 @@ class Statistics : AppCompatActivity() {
         matchRatio.text = df.format(matchesWon.toFloat() / matchesLost.toFloat()).toString()
         setRatio.text = df.format(setsWonScore.toFloat() / setsLostScore.toFloat()).toString()
         gamesRatio.text = df.format(gamesWonScore.toFloat() / gamesLostScore.toFloat()).toString()
+    }
+
+    private fun viewScoreOpp(){
+        val scoreOppList = dbHandler.getScoresOpp(this)
+        val adapter = OppAdapter(this, scoreOppList, this)
+        val rv : RecyclerView = findViewById(R.id.rvOpponents)
+        rv.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
+        rv.adapter = adapter
     }
 
     fun ratioInfoBtnClicked(view: View) {

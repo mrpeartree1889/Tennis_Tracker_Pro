@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:background="@drawable/statistics_round_white"
+    android:gravity="center"
+    android:paddingHorizontal="16dp"
+    android:weightSum="10">
+
+    <TextView
+        android:id="@+id/oppName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5.5"
+        android:text="@string/opponent_s_name"
+        android:textColor="@color/colorTextBlack" />
+
+    <TextView
+        android:id="@+id/totalGames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:text="@string/zero"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/loWon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:background="@color/primaryColor"
+        android:padding="5dp"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/loLost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_weight="1"
+        android:background="@color/accentColorSec"
+        android:padding="5dp"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/loRatio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:text="0.00"
+        android:textAlignment="center"
+        android:textColor="@color/colorTextBlack" />
+
+</LinearLayout>

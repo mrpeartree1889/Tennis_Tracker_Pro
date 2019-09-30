@@ -37,3 +37,9 @@ class Statistics{
     var gamesWon : Int = 0
     var gamesLost : Int = 0
 }
+
+class scoreOpponents {
+    var opponentName : String = ""
+    var matchesWon : Int = 0
+    var matchesLost: Int = 0
+}

@@ -69,6 +69,8 @@
     <string name="set_6">Set #6</string>
     <string name="set_7">Set #7</string>
     <string name="save_edit">Save edit</string>
+    <string name="wins">Wins</string>
+    <string name="losses">Losses</string>
 
 
 </resources>
