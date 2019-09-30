@@ -165,20 +165,40 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
                         Log.d("errorFinding","Score at $cursor is $matchesWon vs $matchesLost")
                     }
                 }
-
                 oppScore.matchesWon = matchesWon
                 oppScore.matchesLost = matchesLost
                 cursor.moveToFirst()
 
                 scoreOpponents.add(oppScore)
             }
-
         }
+
+
 
         oppNameCursor.close()
         cursor.close()
         db.close()
         return scoreOpponents
+    }
+
+    fun getUniqueOppNames(mCtx: Context) : ArrayList<String> {
+        val db = this.readableDatabase
+        val oppNameCursor = db.query(true, MATCHES_TABLE_NAME, arrayOf(COLUMN_OPPONENT_NAME), null, null, COLUMN_OPPONENT_NAME, null, COLUMN_OPPONENT_NAME, null)
+        val uniqueOppNames = ArrayList<String>()
+        uniqueOppNames.add("All opponents")
+
+        if (oppNameCursor.count == 0)
+            Toast.makeText(mCtx, "No records found", Toast.LENGTH_SHORT).show() else {
+            while (oppNameCursor.moveToNext()) {
+                val name =
+                    oppNameCursor.getString(oppNameCursor.getColumnIndex(COLUMN_OPPONENT_NAME))
+                uniqueOppNames.add(name)
+            }
+        }
+
+        oppNameCursor.close()
+        db.close()
+        return uniqueOppNames
     }
 
     fun addMatch(mCtx: Context, match: Match) {

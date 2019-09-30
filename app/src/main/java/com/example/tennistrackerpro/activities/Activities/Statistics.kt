@@ -35,11 +35,13 @@ class Statistics : AppCompatActivity() {
         matchHistoryLayout.setOnClickListener() {
             val intent = Intent(this, MatchHistory::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
         }
 
         newMatchLayout.setOnClickListener() {
             val intent = Intent(this, AddMatch::class.java)
             startActivity(intent)
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
     }
 
