@@ -9,7 +9,7 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/topBar"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:adjustViewBounds="false"
@@ -19,7 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_bar"
+        app:srcCompat="@drawable/top_bar_v2"
+        android:transitionName="topBarTransition"
         android:contentDescription="@string/top_bar_image" />
 
     <TextView
@@ -32,7 +33,7 @@
         android:textColor="@color/primaryColor"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:contentDescription="@string/options"
+        android:onClick="exportBtnClicked"
         app:layout_constraintBottom_toTopOf="@+id/activityTitle"
         app:layout_constraintEnd_toEndOf="@+id/activityTitle"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,6 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/off_white_bckg_small_radius"
+        android:gravity="center"
         android:orientation="horizontal"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/activityTitle"
@@ -59,11 +62,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/exportDataTxtBtn"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:onClick="exportMatchesClicked"
             android:paddingVertical="4dp"
             android:paddingStart="12dp"
             android:paddingEnd="8dp"
@@ -76,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:contentDescription="@string/options"
+            android:onClick="optBtnClickedHide"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/activityTitle"
             app:layout_constraintEnd_toEndOf="@+id/activityTitle"
@@ -89,7 +94,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/activityTitle"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
 
         <TextView
             android:id="@+id/textView"
@@ -107,7 +112,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/bottomButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -186,7 +191,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/bottomButtons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />

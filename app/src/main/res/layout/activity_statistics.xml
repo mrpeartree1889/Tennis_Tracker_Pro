@@ -8,7 +8,7 @@
     android:background="@android:color/white">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/topBar"
         android:layout_width="0dp"
         android:layout_height="130dp"
         android:adjustViewBounds="false"
@@ -18,20 +18,21 @@
         android:scaleType="fitStart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:transitionName="topBarTransition"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_bar" />
+        app:srcCompat="@drawable/top_bar_v2" />
 
     <TextView
         android:id="@+id/activityTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:text="@string/statistics"
+        android:text="@string/statistics_title"
         android:textAlignment="textEnd"
         android:textColor="@color/primaryColor"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/topBar"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,7 +46,7 @@
         app:layout_constraintEnd_toStartOf="@+id/setsPlayedLayout"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
 
         <TextView
             android:id="@+id/textView14"
@@ -188,7 +189,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/matchesPlayedLayout"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
 
         <TextView
             android:id="@+id/totalSetsPlayedTxt"

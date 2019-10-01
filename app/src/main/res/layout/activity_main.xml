@@ -9,26 +9,17 @@
 
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:scaleType="fitStart"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/top_bar_main_page"
-        android:contentDescription="@string/top_bar_image" />
-
-    <ImageView
         android:id="@+id/imageView7"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_marginTop="32dp"
+        android:contentDescription="@string/tennis_tracker_icon_descipt"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ttpro_ic_transp"
-        android:contentDescription="@string/tennis_tracker_icon_descipt" />
+        app:layout_constraintVertical_chainStyle="packed"/>
 
     <TextView
         android:id="@+id/textView5"
@@ -39,7 +30,9 @@
         android:textColor="@android:color/white"
         android:textSize="50sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/newMatchBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
@@ -99,10 +92,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/clipboard_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_clipboard_black"
-            android:contentDescription="@string/clipboard_image" />
+            app:srcCompat="@drawable/ic_clipboard_black" />
 
         <TextView
             android:id="@+id/textView7"
@@ -135,10 +128,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:contentDescription="@string/line_graphic_image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_graph_black"
-            android:contentDescription="@string/line_graphic_image" />
+            app:srcCompat="@drawable/ic_graph_black" />
 
         <TextView
             android:id="@+id/textView6"

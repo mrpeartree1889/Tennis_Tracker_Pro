@@ -403,4 +403,25 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
 
         return mainStatistics
     }
+
+    fun getExportFile(mCtx: Context) : StringBuilder {
+        var stringBuilderOutput : StringBuilder = StringBuilder()
+
+        val qry = "SELECT * FROM $MATCHES_TABLE_NAME ORDER BY $COLUMN_DATE ASC"
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(qry, null)
+
+        stringBuilderOutput.append("OpponentName,Date,MyScore,OppScore")
+
+        while(cursor.moveToNext()) {
+            val opponentName = cursor.getString(cursor.getColumnIndex(COLUMN_OPPONENT_NAME)).toString()
+            val date = cursor.getString(cursor.getColumnIndex(COLUMN_DATE)).toString()
+            val myScore = cursor.getInt(cursor.getColumnIndex(COLUMN_MY_SCORE)).toString()
+            val opponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_OPPONENT_SCORE))).toString()
+
+            stringBuilderOutput.append("\n"+opponentName+","+date+","+myScore+","+opponentScore)
+        }
+
+        return stringBuilderOutput
+    }
 }

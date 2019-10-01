@@ -48,6 +48,7 @@
     <string name="not_recorded">Not recorded</string>
 
     // STATISTICS
+    <string name="statistics_title">STATISTICS</string>
     <string name="matches_won">Matches won</string>
     <string name="matches_lost">Matches lost</string>
     <string name="total_matches_played">Total matches played</string>
