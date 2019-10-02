@@ -73,8 +73,8 @@
                     android:id="@+id/opponentsName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
+                    android:autofillHints="@string/opponent_s_name"
                     android:backgroundTint="@color/colorTextGrey"
                     android:ems="10"
                     android:hint="@string/opponent_s_name"
@@ -82,8 +82,15 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="10dp"
                     android:textColor="@color/colorTextBlack"
-                    android:textColorHint="@color/colorTextGrey"
-                    android:autofillHints="@string/opponent_s_name" />
+                    android:textColorHint="@color/colorTextGrey" />
+
+                <Spinner
+                    android:id="@+id/spinnerOpponentsName"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:dropDownWidth="match_parent"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout
@@ -112,8 +119,8 @@
                     android:id="@+id/courtName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:layout_weight="4"
+                    android:layout_weight="3"
+                    android:autofillHints="@string/court_opt"
                     android:backgroundTint="@color/colorTextGrey"
                     android:ems="0"
                     android:hint="@string/court_opt"
@@ -121,8 +128,15 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="10dp"
                     android:textColor="@color/colorTextBlack"
-                    android:textColorHint="@color/colorTextGrey"
-                    android:autofillHints="@string/court_opt" />
+                    android:textColorHint="@color/colorTextGrey" />
+
+                <Spinner
+                    android:id="@+id/spinnerCourtName"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:dropDownWidth="match_parent"
+                    android:spinnerMode="dialog" />
             </LinearLayout>
 
             <LinearLayout

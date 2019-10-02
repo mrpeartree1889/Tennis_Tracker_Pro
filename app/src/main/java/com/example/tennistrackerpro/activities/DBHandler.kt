@@ -133,7 +133,6 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
                 match.tenthSetMyScore = cursor.getInt(cursor.getColumnIndex((COLUMN_TENTH_SET_MY_SCORE)))
                 match.tenthSetOpponentScore = cursor.getInt(cursor.getColumnIndex((COLUMN_TENTH_SET_OPPONENT_SCORE)))
 
-
                 matches.add(match)
             }
         }
@@ -199,6 +198,45 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
         oppNameCursor.close()
         db.close()
         return uniqueOppNames
+    }
+
+    fun getUniqueOppNamesAddMatch(mCtx: Context) : ArrayList<String> {
+        val db = this.readableDatabase
+        val oppNameCursor = db.query(true, MATCHES_TABLE_NAME, arrayOf(COLUMN_OPPONENT_NAME), null, null, COLUMN_OPPONENT_NAME, null, COLUMN_OPPONENT_NAME, null)
+        val uniqueOppNames = ArrayList<String>()
+
+        if (oppNameCursor.count == 0)
+            Toast.makeText(mCtx, "No records found", Toast.LENGTH_SHORT).show() else {
+            while (oppNameCursor.moveToNext()) {
+                val name =
+                    oppNameCursor.getString(oppNameCursor.getColumnIndex(COLUMN_OPPONENT_NAME))
+                uniqueOppNames.add(name)
+            }
+        }
+
+        oppNameCursor.close()
+        db.close()
+        return uniqueOppNames
+    }
+
+    fun getUniqueCourts(mCtx: Context) : ArrayList<String> {
+        val db = this.readableDatabase
+        val courtNameCursor = db.query(true, MATCHES_TABLE_NAME, arrayOf(COLUMN_COURT_NAME), null, null, COLUMN_OPPONENT_NAME, null, COLUMN_OPPONENT_NAME, null)
+        val uniqueCourtNames : ArrayList<String> = ArrayList()
+
+        if (courtNameCursor.count == 0) {
+            Toast.makeText(mCtx, "No records found", Toast.LENGTH_SHORT).show()
+            uniqueCourtNames.add("NO RECORDS")
+        } else {
+            while (courtNameCursor.moveToNext()) {
+                val name = courtNameCursor.getString(courtNameCursor.getColumnIndex(COLUMN_COURT_NAME))
+                uniqueCourtNames.add(name)
+            }
+        }
+
+        courtNameCursor.close()
+        db.close()
+        return uniqueCourtNames
     }
 
     fun addMatch(mCtx: Context, match: Match) {
@@ -405,7 +443,7 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
     }
 
     fun getExportFile(mCtx: Context) : StringBuilder {
-        var stringBuilderOutput : StringBuilder = StringBuilder()
+        val stringBuilderOutput : StringBuilder = StringBuilder()
 
         val qry = "SELECT * FROM $MATCHES_TABLE_NAME ORDER BY $COLUMN_DATE ASC"
         val db = this.readableDatabase
@@ -422,6 +460,7 @@ class DBHandler(context: Context, name: String?, factory: SQLiteDatabase.CursorF
             stringBuilderOutput.append("\n"+opponentName+","+date+","+myScore+","+opponentScore)
         }
 
+        cursor.close()
         return stringBuilderOutput
     }
 }

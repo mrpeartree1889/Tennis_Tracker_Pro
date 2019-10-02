@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.example.tennistrackerpro.R
@@ -44,6 +47,9 @@ class AddMatch : AppCompatActivity() {
             val match: Match = dbHandler.getMatch(this, matchId)
             populateView(match, matchPosition)
         }
+
+        spinnerOpponentsName()
+        spinnerCourtName()
 
         // SCORING
         // MATCH SCORING BTNS
@@ -658,6 +664,63 @@ class AddMatch : AppCompatActivity() {
         }
 
         return editMatch
+    }
+
+    // SPINNNERS
+    private fun spinnerOpponentsName() {
+        val spinner = findViewById<Spinner>(R.id.spinnerOpponentsName)
+        val names = dbHandler.getUniqueOppNamesAddMatch(this)
+        if (names[0] == "NO RECORDS" || names[0].isEmpty()){
+            toast("No opponents found on record")
+            spinner.visibility = View.INVISIBLE
+            opponentsName.text.clear()
+        } else {
+            names.add("Other (specify)")
+            if (spinner != null) {
+                val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, names)
+                spinner.adapter = arrayAdapter
+
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(p0: AdapterView<*>?) {   }
+
+                    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                        if (spinner.selectedItem.toString() == "Other (specify)") {
+                            opponentsName.text.clear()
+                        } else {
+                            opponentsName.setText(spinner.selectedItem.toString())
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun spinnerCourtName() {
+        val spinner = findViewById<Spinner>(R.id.spinnerCourtName)
+        val courts = dbHandler.getUniqueCourts(this)
+        if (courts[0] == "NO RECORDS" || courts[0].isEmpty()){
+            toast("No opponents found on record")
+            spinner.visibility = View.INVISIBLE
+            courtName.text.clear()
+        } else {
+            courts.add("Other (specify)")
+            if (spinner != null) {
+                val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courts)
+                spinner.adapter = arrayAdapter
+
+                spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(p0: AdapterView<*>?) {   }
+
+                    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                        if (spinner.selectedItem.toString() == "Other (specify)") {
+                            courtName.text.clear()
+                        } else {
+                            courtName.setText(spinner.selectedItem.toString())
+                        }
+                    }
+                }
+            }
+        }
     }
 
     // CLEAR SCORE AND TEXT FUNCTIONS
