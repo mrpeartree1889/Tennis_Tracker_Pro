@@ -17,7 +17,7 @@ Android app to keep track of your tennis games
 - Statistics
 - Export data
 
-Everything is stored locally and the information never leaves your device.
+Everything is stored locally and the information never leaves your device (unless you choose to export it to your own google drive or email).
 
 ## Next features to implement :soon:
 - Option to add or delete sets :100::heavy_check_mark:
